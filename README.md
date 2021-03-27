@@ -17,8 +17,8 @@ Open Prisma studio
 `npx prisma studio`
 
 ## Run backend commands
-`npm install`
-`npm start`
+* `npm install`
+* `npm start`
 
 ## Import mutual aid locations from CSV to database
 `npx ts-node script.ts`
