@@ -9,12 +9,12 @@
 * Suhail Singh
 
 ## Prisma Commands
-Migrate models to Postgresql on Heroku <br />
-* `npx prisma db push --preview-feature` <br />
-Update database to reflect prisma schema <br />
-* `prisma generate` <br />
-Open Prisma studio <br />
-* `npx prisma studio` <br />
+# Migrate models to Postgresql on Heroku
+* `npx prisma db push --preview-feature`
+# Update database to reflect prisma schema
+* `prisma generate`
+# Open Prisma studio
+* `npx prisma studio`
 
 ## Run backend commands
 * `npm install`
