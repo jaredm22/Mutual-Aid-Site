@@ -1,4 +1,4 @@
-Organization Name,Address 1,Address 2,City,State,Zip,Phone,Email,Description
-test1,123 location 1,,Boston,MA,02215,9172458489,test1@gmail.com,test desc1
-test2,124 location 1,apt 2,Boston,MA,02216,9172458490,test2@gmail.com,test desc2
-test3,125 location 1,,Boston,MA,02217,9172458491,test3@gmail.com,test desc3
+Organization Name,Address 1,Address 2,City,State,Zip,Phone,Email,Description,Links
+test1,123 location 1,,Boston,MA,02215,9172458489,test1@gmail.com,test desc1,"https://www.google.com/,https://yahoo.com/"
+test2,124 location 1,apt 2,Boston,MA,02216,9172458490,test2@gmail.com,test desc2,
+test3,125 location 1,,Boston,MA,02217,9172458491,test3@gmail.com,test desc3,

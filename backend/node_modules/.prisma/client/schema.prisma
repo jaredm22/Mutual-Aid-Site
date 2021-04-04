@@ -20,5 +20,6 @@ model MutualAid {
   zip           String
   phone         String[]
   email         String[]
+  links         String[]
   description   String 
 }

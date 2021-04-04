@@ -20,11 +20,15 @@ async function addToDB(values: string[]) {
     for (var i=0; i<values.length; i++){
         var phones: string[] = [values[i][6]]
         var emails: string[] = [values[i][7]]
+        var links: string[] = [values[i][9]]
         if (values[i][6].indexOf(',') > -1) {
             phones = values[i][6].split(",")
         }
         if (values[i][7].indexOf(',') > -1) {
             emails = values[i][7].split(",")
+        }
+        if (values[i][9].indexOf(',') > -1) {
+            links = values[i][9].split(",")
         }
         var details = {
             name: values[i][0],
@@ -35,7 +39,8 @@ async function addToDB(values: string[]) {
             zip: values[i][5],
             phone: phones,
             email: emails,
-            description: values[i][8]
+            description: values[i][8],
+            links: links
         }
         const loc = await prisma.mutualAid.create({data: details})
     }

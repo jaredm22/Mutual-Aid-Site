@@ -9,12 +9,12 @@ app.listen(port, () => {
     console.log( `Server started at http://localhost:${ port }` );
 });
 
-app.get('/listAllLocations', async (req, res) => {
+app.get('/listAllLocations', async (req:any, res:any) => {
     const locations = await prisma.mutualAid.findMany()
     res.json(locations)
 })
 
-app.get('/locationInfo/:zip', async (req, res) => {
+app.get('/locationInfo/:zip', async (req:any, res:any) => {
     const locations = await prisma.mutualAid.findMany({
         where: {
             zip: {
