@@ -18,7 +18,7 @@
 
 ## Run backend commands
 * `npm install`
-* `npm start`
+* `npx ts-node start`
 
 ## Import mutual aid locations from CSV to database
 `npx ts-node script.ts`
