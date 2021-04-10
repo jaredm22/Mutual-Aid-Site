@@ -40,7 +40,8 @@ async function addToDB(values: string[]) {
             phone: phones,
             email: emails,
             description: values[i][8],
-            links: links
+            links: links,
+            neighborhood: values[i][10]
         }
         const loc = await prisma.mutualAid.create({data: details})
     }

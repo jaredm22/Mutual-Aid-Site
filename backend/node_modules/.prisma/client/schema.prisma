@@ -18,6 +18,7 @@ model MutualAid {
   city          String      @db.VarChar(255)
   state         String      @db.VarChar(255)
   zip           String
+  neighborhood  String
   phone         String[]
   email         String[]
   links         String[]
