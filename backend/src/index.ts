@@ -32,7 +32,6 @@ app.get('/locationInfo/:zip', async (req:any, res:any) => {
 
 app.post('/location/add', async (req:any, res:any) => {
     const {name, address_one, address_two, city, state, zip, phone, email, links, description, neighborhood } = req.body;
-    console.log(name, address_one)
     try { 
         const location = await prisma.mutualAid.create({
             data: {

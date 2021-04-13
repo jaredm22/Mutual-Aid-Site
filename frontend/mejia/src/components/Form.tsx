@@ -7,6 +7,7 @@ interface FormProps {
 
 interface FormState {
     name: string,
+    neighborhood: string,
     address_one: string,
     address_two: string,
     city: string,
@@ -23,6 +24,7 @@ export class Form extends React.Component<FormProps, FormState> {
         super(props);
         const initialState = {
             name: '',
+            neighborhood: '',
             address_one: '',
             address_two: '',
             city: '',
@@ -68,6 +70,7 @@ export class Form extends React.Component<FormProps, FormState> {
             },
             data: {
                 name: this.state.name,
+                neighborhood: this.state.neighborhood,
                 address_one: this.state.address_one,
                 address_two: this.state.address_two,
                 city: this.state.city,
@@ -96,6 +99,15 @@ export class Form extends React.Component<FormProps, FormState> {
                     <div className='name'>
                         <label htmlFor='name'>Name</label>
                         <input type='name' name='name' onChange={this.handleChange} />
+                    </div>
+                    <div className='neighborhood'>
+                        <label htmlFor='neighborhood'>Neighborhood</label>
+                        <select value={this.state.neighborhood} onChange={this.handleChange}>
+                            <option value="grapefruit">Grapefruit</option>
+                            <option value="lime">Lime</option>
+                            <option value="coconut">Coconut</option>
+                            <option value="mango">Mango</option>
+                    </select>
                     </div>
                     <div className='address_one'>
                         <label htmlFor='address_one'>Address Line 1</label>
