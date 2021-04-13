@@ -103,10 +103,29 @@ export class Form extends React.Component<FormProps, FormState> {
                     <div className='neighborhood'>
                         <label htmlFor='neighborhood'>Neighborhood</label>
                         <select value={this.state.neighborhood} onChange={this.handleChange}>
-                            <option value="grapefruit">Grapefruit</option>
-                            <option value="lime">Lime</option>
-                            <option value="coconut">Coconut</option>
-                            <option value="mango">Mango</option>
+                            <option value="allston">Allston</option>
+                            <option value="back bay">Back Bay</option>
+                            <option value="bay village">Bay Village</option>
+                            <option value="beacon hill">Beacon Hill</option>
+                            <option value="brighton">Brighton</option>
+                            <option value="charlestown">Charlestown</option>
+                            <option value="chinatown">Chinatown</option>
+                            <option value="dorchester">Dorchester</option>
+                            <option value="downtown">Downtown</option>
+                            <option value="east boston">East Boston</option>
+                            <option value="fenway-kenmore">Fenway-Kenmore</option>
+                            <option value="hyde park">Hyde Park</option>
+                            <option value="jamaica plain">Jamaica Plain</option>
+                            <option value="mattapan">Mattapan</option>
+                            <option value="mission hill">Mission Hill</option>
+                            <option value="north end">North End</option>
+                            <option value="rosindale">Rosindale</option>
+                            <option value="roxbury">Roxbury</option>
+                            <option value="south boston">South Boston</option>
+                            <option value="south end">South End</option>
+                            <option value="west end">west end</option>
+                            <option value="west roxbury">West Roxbury</option>
+                            <option value="wharf district">Wharf District</option>
                     </select>
                     </div>
                     <div className='address_one'>
