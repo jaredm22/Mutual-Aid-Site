@@ -13,9 +13,9 @@ interface FormState {
     city: string,
     state: string,
     zip: string,
-    phone: string[],
-    email: string[],
-    links: string[],
+    phone: string,
+    email: string,
+    links: string,
     description: string
 }
 
@@ -24,15 +24,15 @@ export class Form extends React.Component<FormProps, FormState> {
         super(props);
         const initialState = {
             name: '',
-            neighborhood: '',
+            neighborhood: 'allston',
             address_one: '',
             address_two: '',
             city: '',
             state: '',
             zip: '',
-            phone: [],
-            email: [],
-            links: [],
+            phone: '',
+            email: '',
+            links: '',
             description: ''
         }
         this.state = initialState;
@@ -43,19 +43,7 @@ export class Form extends React.Component<FormProps, FormState> {
     handleChange = (e: any) => {
         e.preventDefault();
         const { name, value } = e.target;
-        switch (name) {
-            case 'phone':
-                this.state.phone.push(value)
-                break;
-            case 'email':
-                this.state.email.push(value)
-                break;
-            case 'links':
-                this.state.links.push(value)
-                break;
-            default:
-                this.setState(Object.assign(this.state, {[name]: value}));
-        }
+        this.setState(Object.assign(this.state, {[name]: value}));
     }
 
     handleSubmit = (e: any) => {
@@ -83,6 +71,8 @@ export class Form extends React.Component<FormProps, FormState> {
             }
         }
 
+        console.log(options)
+
         axios(options)
         .then((res:any) => {
             console.log('Successfully added')
@@ -102,7 +92,7 @@ export class Form extends React.Component<FormProps, FormState> {
                     </div>
                     <div className='neighborhood'>
                         <label htmlFor='neighborhood'>Neighborhood</label>
-                        <select value={this.state.neighborhood} onChange={this.handleChange}>
+                        <select value={this.state.neighborhood} name="neighborhood" onChange={this.handleChange}>
                             <option value="allston">Allston</option>
                             <option value="back bay">Back Bay</option>
                             <option value="bay village">Bay Village</option>
@@ -123,7 +113,7 @@ export class Form extends React.Component<FormProps, FormState> {
                             <option value="roxbury">Roxbury</option>
                             <option value="south boston">South Boston</option>
                             <option value="south end">South End</option>
-                            <option value="west end">west end</option>
+                            <option value="west end">West End</option>
                             <option value="west roxbury">West Roxbury</option>
                             <option value="wharf district">Wharf District</option>
                     </select>
@@ -160,9 +150,9 @@ export class Form extends React.Component<FormProps, FormState> {
                         <label htmlFor='links'>Link</label>
                         <input type='links' name='links' onChange={this.handleChange} />
                     </div>
-                    <div className='Description'>
-                        <label htmlFor='Description'>Description</label>
-                        <input type='Description' name='Description' onChange={this.handleChange} />
+                    <div className='description'>
+                        <label htmlFor='description'>Description</label>
+                        <input type='description' name='description' onChange={this.handleChange} />
                     </div>
                     <div className='submit'>
                         <button>Submit</button>

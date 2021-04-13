@@ -19,8 +19,8 @@ model MutualAid {
   state         String      @db.VarChar(255)
   zip           String
   neighborhood  String
-  phone         String[]
-  email         String[]
-  links         String[]
+  phone         String
+  email         String
+  links         String
   description   String 
 }
