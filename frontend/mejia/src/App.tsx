@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import Form from './components/Form';
 import WrappedMap from './components/Map';
-require('dotenv').config()
 
 
 class App extends React.Component {
