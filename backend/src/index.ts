@@ -19,7 +19,7 @@ app.get('/listAllLocations', async (req:any, res:any) => {
     res.json(locations)
 })
 
-app.get('/locationInfo/:zip', async (req:any, res:any) => {
+app.get('/locationInfo/findByZip/:zip', async (req:any, res:any) => {
     const locations = await prisma.mutualAid.findMany({
         where: {
             zip: {
@@ -29,6 +29,18 @@ app.get('/locationInfo/:zip', async (req:any, res:any) => {
     })
     res.json(locations)
 })
+
+app.get('/locationInfo/findByNeighborhood/:neighborhood', async(req:any, res:any) => {
+    const locations = await prisma.mutualAid.findMany({
+        where: {
+            neighborhood: {
+                equals: req.params.neighborhood
+            }
+        }
+    })
+    res.json(locations)
+})
+
 
 app.post('/location/add', async (req:any, res:any) => {
     const {name, address_one, address_two, city, state, zip, phone, email, links, description, neighborhood } = req.body;
