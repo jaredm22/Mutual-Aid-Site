@@ -24,7 +24,7 @@ export class Form extends React.Component<FormProps, FormState> {
         super(props);
         const initialState = {
             name: '',
-            neighborhood: 'allston',
+            neighborhood: 'boston wide',
             address_one: '',
             address_two: '',
             city: '',
@@ -93,6 +93,7 @@ export class Form extends React.Component<FormProps, FormState> {
                     <div className='neighborhood'>
                         <label htmlFor='neighborhood'>Neighborhood</label>
                         <select value={this.state.neighborhood} name="neighborhood" onChange={this.handleChange}>
+                            <option value="boston wide">Boston Wide</option>
                             <option value="allston">Allston</option>
                             <option value="back bay">Back Bay</option>
                             <option value="bay village">Bay Village</option>
