@@ -1,0 +1,33 @@
+{
+  "name": "mutual-aid-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mutual-Aid-Site",
+  "author": "Jared Min",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "@turf/centroid": "^6.3.0",
+    "gatsby": "^3.2.1",
+    "gatsby-plugin-gatsby-cloud": "^2.3.0",
+    "gatsby-plugin-sitemap": "^3.3.0",
+    "gatsby-plugin-theme-ui": "^0.6.2",
+    "leaflet": "^1.7.1",
+    "mapbox-gl": "^2.2.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "theme-ui": "^0.6.2",
+    "worker-loader": "^3.0.8"
+  },
+  "devDependencies": {
+    "json-loader": "^0.5.7"
+  }
+}

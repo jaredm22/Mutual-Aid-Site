@@ -1,1 +1,5 @@
-.env
+.env.*
+.gitignore
+node_modules
+.cache
+public

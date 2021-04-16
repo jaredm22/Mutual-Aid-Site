@@ -22,3 +22,9 @@
 
 ## Import mutual aid locations from CSV to database
 `npx ts-node script.ts`
+## Frontend 
+Add your MapBox Access Token as a variable named GATSBY_MAPBOX_ACCESS_TOKEN to a file called .env.development file in the frontend folder. Then run: 
+```
+npm run develop
+```
+The site will be running on localhost:8000. 
