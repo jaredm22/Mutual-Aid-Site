@@ -20,16 +20,12 @@ async function addToDB(values: string[]) {
     for (var i=0; i<values.length; i++){
         var details = {
             name: values[i][0],
-            address_one: values[i][1],
-            address_two: values[i][2],
-            city: values[i][3],
-            state: values[i][4],
-            zip: values[i][5],
-            phone: values[i][6],
-            email: values[i][7],
-            description: values[i][8],
-            links: values[i][9],
-            neighborhood: values[i][10]
+            neighborhood: values[i][1],
+            phone: values[i][2],
+            email: values[i][3],
+            website: values[i][4],
+            need_help: values[i][5],
+            give_help: values[i][6]
         }
         const loc = await prisma.mutualAid.create({data: details})
     }

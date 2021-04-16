@@ -13,14 +13,10 @@ generator client {
 model MutualAid {
   id            Int         @default(autoincrement()) @id
   name          String      @db.VarChar(255)
-  address_one   String      @db.VarChar(255)
-  address_two   String      @db.VarChar(255)
-  city          String      @db.VarChar(255)
-  state         String      @db.VarChar(255)
-  zip           String
   neighborhood  String
   phone         String
   email         String
-  links         String
-  description   String 
+  website       String
+  need_help     String
+  give_help     String
 }
