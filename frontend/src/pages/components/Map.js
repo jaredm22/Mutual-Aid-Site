@@ -1,11 +1,11 @@
 import * as React from 'react';
+import axios from 'axios';
 import '../index.css';
 import centroid from '@turf/centroid';
 import mapboxgl from 'mapbox-gl';
-// import MapboxWorker from 'mapbox-worker!/dist/mapbox-gl-csp-worker';
 import data from '../../data/neighborhoods'
+
   
-// mapboxgl.workerClass = MapboxWorker;
 mapboxgl.accessToken = process.env.GATSBY_MAPBOX_ACCESS_TOKEN;
 // function flyToStore(currentFeature) {
 //     map.flyTo({
@@ -68,6 +68,8 @@ export default class Map extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            organizationData: null,
+            dataLoaded: false,
             lng: -70.9,
             lat: 42.35,
             zoom: 9
@@ -75,8 +77,16 @@ export default class Map extends React.Component {
         this.mapContainer = React.createRef();
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        const res = await axios.get("http://localhost:5000/listAllLocations");
+        const organization_data = res.data
+        console.log(organization_data);
+        
+        // const bostonZipCodes = ["02128", "02126", "02136", "02122", "02124", "02121", "02125", "02131", "02119", "02120", "02132", "02111", "02118", "02130", "02127", "02210", "02163", "02134", "02135", "02129", "02108", "02114", "02116", "02199", "02222", "02109", "02110", "02113", "02115", "02215"]
+                
         const { lng, lat, zoom } = this.state;
+        
+        // Create mapbox map
         const map = new mapboxgl.Map({
             container: this.mapContainer.current,
             style: 'mapbox://styles/jkym2/ckni1o0zu06zh17qigui0dmuv',
@@ -84,13 +94,13 @@ export default class Map extends React.Component {
             zoom: zoom
         });
 
+        // When map loads, add neighborhood layer data from source and add layer to map
         map.on('load', function () {
             map.addSource('neighborhoods', {
                 'type': 'geojson', data
             });
-                 
-                // Add a layer showing the state polygons.
 
+            //
             map.addLayer({
                 'id': 'neighborhoods-layer',
                 'type': 'fill',
@@ -134,9 +144,7 @@ export default class Map extends React.Component {
 
             map.on('click', 'neighborhoods-layer', function (e) {
 
-                var coordinates = e.lngLat;
                 console.log(e.features[0]);
-                var props = e.features[0].properties;
                 const coor = centroid(e.features[0]);
                 console.log(coor);
 
@@ -159,14 +167,19 @@ export default class Map extends React.Component {
                 map.getCanvas().style.cursor = 'pointer';
             });
                 
-                // Change it back to a pointer when it leaves.
+            // Change it back to a pointer when it leaves.
             map.on('mouseleave', 'neighborhoods-layer', function () {
                 map.getCanvas().style.cursor = '';
             });
         });
+        this.setState({
+            organizationData: organization_data,
+            dataLoaded: true,
+        })
     }
 
     render() {
+        console.log(this.state.organizationData);
         return (
             <div className="main-container">
                 <div className='sidebar'>
@@ -174,7 +187,12 @@ export default class Map extends React.Component {
                         <h1>Boston Mutual Aid</h1>
                         <br></br>
                     </div>
-                    <Listings data={data}></Listings>
+                    <div className="neighborhoods">
+                        {this.state.dataLoaded ? 
+                            <Neighborhoods data={data} data2={this.state.organizationData}></Neighborhoods> :
+                            false
+                        }
+                    </div>
                 </div>
                 <div ref={this.mapContainer} className="map" id="map"></div>
             </div>
@@ -183,24 +201,57 @@ export default class Map extends React.Component {
 }
 
 
-function Listings (props) {
+function Organization (props) {
+    console.log("working")
+    console.log(props.org);
+    return(
+       <p>Working</p>
+    )
+}
+
+function Neighborhoods (props) {
     const data = props.data;
-    const neighborhoods = data.features.map( (neighborhood) => {
-        console.log(neighborhood.properties);
-        var prop = neighborhood.properties;
-        return prop;
+
+    const d = data.features.map((neighborhood) => {
+        return neighborhood.properties.Name;
     });
+    
+    d.sort();
+    console.log(d);
+
+    console.log(data.features);
+
+    const neighborhoods = [];
+    d.forEach(name => {
+        const k = data.features.find(n => {
+            return n.properties.Name === name;
+        })
+        neighborhoods.push(k.properties);
+    });
+    
+    // data.features.map((neighborhood) => {
+    //     console.log(neighborhood.properties);
+    //     var prop = neighborhood.properties;
+    //     return prop;
+    // });
+
+    // const neighborhoods = data.features.map((neighborhood) => {
+    //     console.log(neighborhood.properties);
+    //     var prop = neighborhood.properties;
+    //     return prop;
+    // });
+
+    const orgs = props.data2;
+    console.log(orgs);
 
     return (
-        <div className="descriptions" id="descriptions">
+        <div className="neighborhoods" id="neighborhoods">
             {neighborhoods.map((neighborhood) => {
                 return (
-                <div id={`listing-${neighborhood.Neighborhood_ID}`} className="item">
-                    <h4>{neighborhood.Name}</h4>
-                    <div>{neighborhood.Neighborhood_ID}</div>
-                    <div>{neighborhood.Acres}</div>
-                    <div>{neighborhood.SqMiles}</div>
-                </div>)
+                    <div id={`neighborhood-${neighborhood.Neighborhood_ID}`} className="item">
+                        <h4>{neighborhood.Name}</h4>
+                    </div>
+                )
             })}
         </div>
     );

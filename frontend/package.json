@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@turf/centroid": "^6.3.0",
+    "axios": "^0.21.1",
     "gatsby": "^3.2.1",
     "gatsby-plugin-gatsby-cloud": "^2.3.0",
     "gatsby-plugin-sitemap": "^3.3.0",
