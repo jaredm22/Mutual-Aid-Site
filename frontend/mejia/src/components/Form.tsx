@@ -8,15 +8,11 @@ interface FormProps {
 interface FormState {
     name: string,
     neighborhood: string,
-    address_one: string,
-    address_two: string,
-    city: string,
-    state: string,
-    zip: string,
     phone: string,
     email: string,
-    links: string,
-    description: string
+    website: string,
+    need_help: string,
+    give_help: string
 }
 
 export class Form extends React.Component<FormProps, FormState> {
@@ -25,15 +21,11 @@ export class Form extends React.Component<FormProps, FormState> {
         const initialState = {
             name: '',
             neighborhood: 'boston wide',
-            address_one: '',
-            address_two: '',
-            city: '',
-            state: '',
-            zip: '',
             phone: '',
             email: '',
-            links: '',
-            description: ''
+            website: '',
+            need_help: '',
+            give_help: ''
         }
         this.state = initialState;
         this.handleChange = this.handleChange.bind(this);
@@ -59,15 +51,11 @@ export class Form extends React.Component<FormProps, FormState> {
             data: {
                 name: this.state.name,
                 neighborhood: this.state.neighborhood,
-                address_one: this.state.address_one,
-                address_two: this.state.address_two,
-                city: this.state.city,
-                state: this.state.state,
-                zip: this.state.zip,
                 phone: this.state.phone,
                 email: this.state.email,
-                links: this.state.links,
-                description: this.state.description
+                website: this.state.website,
+                need_help: this.state.need_help,
+                give_help: this.state.give_help
             }
         }
 
@@ -119,26 +107,6 @@ export class Form extends React.Component<FormProps, FormState> {
                             <option value="wharf district">Wharf District</option>
                     </select>
                     </div>
-                    <div className='address_one'>
-                        <label htmlFor='address_one'>Address Line 1</label>
-                        <input type='address_one' name='address_one' onChange={this.handleChange} />
-                    </div>
-                    <div className='address_two'>
-                        <label htmlFor='address_two'>Address Line 2</label>
-                        <input type='address_two' name='address_two' onChange={this.handleChange} />
-                    </div>
-                    <div className='city'>
-                        <label htmlFor='city'>City</label>
-                        <input type='city' name='city' onChange={this.handleChange} />
-                    </div>
-                    <div className='state'>
-                        <label htmlFor='state'>State</label>
-                        <input type='state' name='state' onChange={this.handleChange} />
-                    </div>
-                    <div className='zip'>
-                        <label htmlFor='zip'>Zip</label>
-                        <input type='zip' name='zip' onChange={this.handleChange} />
-                    </div>
                     <div className='phone'>
                         <label htmlFor='phone'>Phone</label>
                         <input type='phone' name='phone' onChange={this.handleChange} />
@@ -147,13 +115,17 @@ export class Form extends React.Component<FormProps, FormState> {
                         <label htmlFor='email'>Email</label>
                         <input type='email' name='email' onChange={this.handleChange} />
                     </div>
-                    <div className='links'>
-                        <label htmlFor='links'>Link</label>
-                        <input type='links' name='links' onChange={this.handleChange} />
+                    <div className='website'>
+                        <label htmlFor='website'>Website</label>
+                        <input type='website' name='website' onChange={this.handleChange} />
                     </div>
-                    <div className='description'>
-                        <label htmlFor='description'>Description</label>
-                        <input type='description' name='description' onChange={this.handleChange} />
+                    <div className='need_help'>
+                        <label htmlFor='need_help'>Link for those who need help:</label>
+                        <input type='need_help' name='need_help' onChange={this.handleChange} />
+                    </div>
+                    <div className='give_help'>
+                        <label htmlFor='give_help'>Link for those who can help:</label>
+                        <input type='give_help' name='give_help' onChange={this.handleChange} />
                     </div>
                     <div className='submit'>
                         <button>Submit</button>
