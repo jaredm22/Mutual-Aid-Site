@@ -4,6 +4,7 @@ import '../index.css';
 import centroid from '@turf/centroid';
 import mapboxgl from 'mapbox-gl';
 import data from '../../data/neighborhoods'
+import Form from './Form';
 
   
 mapboxgl.accessToken = process.env.GATSBY_MAPBOX_ACCESS_TOKEN;
@@ -187,6 +188,7 @@ export default class Map extends React.Component {
                         <h1>Boston Mutual Aid</h1>
                         <br></br>
                     </div>
+                    <Form />
                     <div className="neighborhoods">
                         {this.state.dataLoaded ? 
                             <Neighborhoods data={data} data2={this.state.organizationData}></Neighborhoods> :
