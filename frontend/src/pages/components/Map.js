@@ -13,65 +13,9 @@ import ListItemText from '@material-ui/core/ListItemtext';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-
+import 'mapbox-gl/dist/mapbox-gl.css';
   
 mapboxgl.accessToken = process.env.GATSBY_MAPBOX_ACCESS_TOKEN;
-// function flyToStore(currentFeature) {
-//     map.flyTo({
-//       center: currentFeature.geometry.coordinates,
-//       zoom: 15
-//     });
-//   }
-  
-// function createPopUp(currentFeature) {
-//     var popUps = document.getElementsByClassName('mapboxgl-popup');
-//     /** Check if there is already a popup on the map and if so, remove it */
-//     if (popUps[0]) popUps[0].remove();
-
-//     var popup = new mapboxgl.Popup({ closeOnClick: false })
-//         .setLngLat(currentFeature.geometry.coordinates)
-//         .setHTML('<h3>Sweetgreen</h3>' +
-//         '<h4>' + currentFeature.properties.address + '</h4>')
-//         .addTo(map);
-// }
-
-
-// function appendData(data) {
-//     const neighborhoods = data.features.map( (neighborhood) => {
-//         var prop = neighborhood.properties;
-//         return prop;
-//     })
-//     console.log(neighborhoods);
-//     data.features.forEach(function(neighborhood, i) {
-//     //   console.log(neighborhood);
-//       var prop = neighborhood.properties;
-
-
-  
-//       /* Add a new listing section to the sidebar. */
-//       var listings = document.getElementById('descriptions');
-//       var listing = listings.appendChild(document.createElement('div'));
-//       /* Assign a unique `id` to the listing. */
-//       listing.id = "listing-" + prop.Neighborhood_ID;
-//       /* Assign the `item` class to each listing for styling. */
-//       listing.className = 'item';
-  
-  
-//       /* Add details to the individual listing. */
-//       var details = listing.appendChild(document.createElement('div'));
-//         details.innerHTML = prop.Name;
-//     //   if (prop.phone) {
-//     //     details.innerHTML += ' · ' + prop.phoneFormatted;
-//     //   }
-//     //   if (prop.distance) {
-//     //     var roundedDistance = Math.round(prop.distance * 100) / 100;
-//     //     details.innerHTML +=
-//     //       '<p><strong>' + roundedDistance + ' miles away</strong></p>';
-//     //   }
-//     });
-// }
-  
-
 export default class Map extends React.Component {
 
     constructor(props) {
@@ -83,7 +27,6 @@ export default class Map extends React.Component {
             lat: 42.35,
             zoom: 9
         };
-        this.mapContainer = React.createRef();
     }
 
     async componentDidMount() {
@@ -96,8 +39,8 @@ export default class Map extends React.Component {
         const { lng, lat, zoom } = this.state;
         
         // Create mapbox map
-        const map = new mapboxgl.Map({
-            container: this.mapContainer.current,
+        var map = new mapboxgl.Map({
+            container: 'map',
             style: 'mapbox://styles/jkym2/ckni1o0zu06zh17qigui0dmuv',
             center: [lng, lat],
             zoom: zoom
@@ -132,47 +75,33 @@ export default class Map extends React.Component {
                 }
             });
 
-            // appendData(data);
-            
-            // map.on('click', 'places', function (e) {
-            //     var coordinates = e.features[0].geometry.coordinates.slice();
-            //     var description = e.features[0].properties.description;
-                 
-            //     // Ensure that if the map is zoomed out such that multiple
-            //     // copies of the feature are visible, the popup appears
-            //     // over the copy being pointed to.
-            //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            //     coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-            //     }
-                 
-            //     new mapboxgl.Popup()
-            //     .setLngLat(coordinates)
-            //     .setHTML(description)
-            //     .addTo(map);
-            // });
-
             map.on('click', 'neighborhoods-layer', function (e) {
 
-                console.log(e.features[0]);
-                const coor = centroid(e.features[0]);
-                console.log(coor);
+                const coor = centroid(e.features[0]).geometry.coordinates;
+                const properties = e.features[0].properties;
 
+                document.getElementById(`neighborhood-${properties.Neighborhood_ID}`).scrollIntoView();
+                document.getElementById(`neighborhood-${properties.Neighborhood_ID}`).click();
                 
                 map.flyTo({
-                    center: coor.geometry.coordinates,
+                    center: coor,
                     essential: true, // this animation is considered essential with respect to prefers-reduced-motion
                     zoom: 12.5
                 });
 
+                while (Math.abs(e.lngLat.lng - coor[0]) > 180) {
+                    coor[0] += e.lngLat.lng > coor[0] ? 360 : -360;
+                }
                 
-                new mapboxgl.Popup()
-                    .setLngLat(coor.geometry.coordinates)
-                    .setHTML(e.features[0].properties.Name)
+                new mapboxgl.Popup({ closeOnClick: true, offset: 25})
+                    .setLngLat(coor)
+                    .setHTML(`<h1>${properties.Name}</h1>`)
                     .addTo(map);
             });
 
+
             // Change the cursor to a pointer when the mouse is over the states layer.
-            map.on('mouseenter', 'neighborhoods-layer', function () {
+            map.on('mouseenter', 'neighborhoods-layer', function (e) {
                 map.getCanvas().style.cursor = 'pointer';
             });
                 
@@ -204,7 +133,7 @@ export default class Map extends React.Component {
                         }
                     </div>
                 </div>
-                <div ref={this.mapContainer} className="map" id="map"></div>
+                <div className="map" id="map"></div>
             </div>
         );
     }
@@ -277,18 +206,22 @@ function Neighborhood(props) {
 
     return (
       <div>
-        <ListItem button onClick={handleClick}>
+        <ListItem button onClick={handleClick} id={`neighborhood-${props.neighborhood.Name == "Boston-wide" ? 1 : props.neighborhood.Neighborhood_ID }`}>
           <ListItemText><h5>{props.neighborhood.Name}</h5></ListItemText>
-          {open ? <ExpandLess /> : <ExpandMore />}
+          {open ? <ExpandMore /> : <ExpandLess />}
         </ListItem>
   
-        <Collapse in={props.neighborhood.Name == "Boston-wide" ? open : !open} timeout="auto" unmountOnExit>
-          {props.orgs.map((org) => {
+        <Collapse in={!open} timeout="auto" unmountOnExit>
+          {props.orgs.length != 0 ? (props.orgs.map((org) => {
             return(
               <ListItem>
                 <Organization key={`org-${org.Name}`} org={org} />
               </ListItem>);
-          })}
+            })): 
+
+            (<ListItem>
+              <ListItemText secondary="No organizations"></ListItemText>
+            </ListItem>)}
         </Collapse>
       </div>
     );
