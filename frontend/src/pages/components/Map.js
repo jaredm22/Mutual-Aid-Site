@@ -221,11 +221,9 @@ function Neighborhoods (props) {
     
     d.sort();
     d.unshift('Boston-wide');
-    console.log(d);
     const o2 = props.orgData.find(i => {
         return i.neighborhood.includes("Boston-wide");
     });
-    console.log(o2)
 
 
     const neighborhoods = [];
@@ -248,7 +246,6 @@ function Neighborhoods (props) {
                 return i.neighborhood.includes(name);
             });
 
-            console.log(k);
             const nbh = {
                 Name: name, 
                 Neighborhood_ID: k.Neighborhood_ID,
@@ -265,7 +262,7 @@ function Neighborhoods (props) {
             id="neighborhoods"
         >
             {neighborhoods.map((neighborhood) => {
-                return (<Neighborhood neighborhood={neighborhood} orgs={neighborhood.orgs}/>);
+                return (<Neighborhood key={neighborhood.Neighborhood_ID} neighborhood={neighborhood} orgs={neighborhood.orgs}/>);
             })}
         </List>
     );
@@ -277,8 +274,6 @@ function Neighborhood(props) {
     const handleClick = () => {
       setOpen(!open);
     };
-  
-    console.log(props)
 
     return (
       <div>
@@ -291,7 +286,7 @@ function Neighborhood(props) {
           {props.orgs.map((org) => {
             return(
               <ListItem>
-                <Organization org={org} />
+                <Organization key={`org-${org.Name}`} org={org} />
               </ListItem>);
           })}
         </Collapse>
@@ -314,7 +309,6 @@ function Neighborhood(props) {
   
   function Organization(props) {
       const org = props.org;
-      console.log(org);
   
       return(
         <Card className="organization">

@@ -33,12 +33,13 @@ a:hover {
 /* The page is split between map and sidebar - the sidebar gets 1/3, map
 gets 2/3 of the page. You can adjust this to your personal liking. */
 .sidebar {
-  position: absolute;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
   width: 33.3333%;
   height: 100%;
   top: 0;
   left: 0;
-  overflow: hidden;
   border-right: 1px solid rgba(0, 0, 0, 0.25);
 }
 
@@ -54,8 +55,6 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
 .heading {
   background: #fff;
   border-bottom: 1px solid #eee;
-  display: flex;
-  flex-direction: column;
   padding: 3em;
   min-height: fit-content;
 }
@@ -79,8 +78,7 @@ transform:none !important;
 
 .neighborhoods {
   height: 100%;
-  overflow: auto;
-  padding-bottom: 60px;
+  overflow: scroll;
 }
 
 .neighborhoods .item {
