@@ -15,7 +15,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import 'mapbox-gl/dist/mapbox-gl.css';
   
-mapboxgl.accessToken = process.env.GATSBY_MAPBOX_ACCESS_TOKEN;
+mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN;
 export default class Map extends React.Component {
 
     constructor(props) {
@@ -162,10 +162,6 @@ function Neighborhoods (props) {
     
     d.sort();
     d.unshift('Boston-wide');
-    const o2 = props.orgData.find(i => {
-        return i.neighborhood.includes("Boston-wide");
-    });
-
 
     const neighborhoods = [];
     d.forEach(name => {
@@ -218,13 +214,13 @@ function Neighborhood(props) {
 
     return (
       <div>
-        <ListItem button onClick={handleClick} id={`neighborhood-${props.neighborhood.Name == "Boston-wide" ? 1 : props.neighborhood.Neighborhood_ID }`}>
+        <ListItem button onClick={handleClick} id={`neighborhood-${props.neighborhood.Name === "Boston-wide" ? 1 : props.neighborhood.Neighborhood_ID }`}>
           <ListItemText><h5>{props.neighborhood.Name}</h5></ListItemText>
           {open ? <ExpandMore /> : <ExpandLess />}
         </ListItem>
   
         <Collapse in={!open} timeout="auto" unmountOnExit>
-          {props.orgs.length != 0 ? (props.orgs.map((org) => {
+          {props.orgs.length !== 0 ? (props.orgs.map((org) => {
             return(
               <ListItem>
                 <Organization key={`org-${org.Name}`} org={org} />
