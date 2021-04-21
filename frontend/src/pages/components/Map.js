@@ -99,6 +99,10 @@ export default class Map extends React.Component {
                     .addTo(map);
             });
 
+            var popup = new mapboxgl.Popup({
+                closeButton: false,
+                closeOnClick: false
+            });
 
             // Change the cursor to a pointer when the mouse is over the states layer.
             map.on('mouseenter', 'neighborhoods-layer', function (e) {
@@ -111,7 +115,7 @@ export default class Map extends React.Component {
                     coor[0] += e.lngLat.lng > coor[0] ? 360 : -360;
                 }
                 
-                new mapboxgl.Popup({ closeOnMove:true, closeOnClick: false, offset: 25})
+                popup
                     .setLngLat(coor)
                     .setHTML(`<h1>${properties.Name}</h1>`)
                     .addTo(map);
@@ -120,6 +124,7 @@ export default class Map extends React.Component {
             // Change it back to a pointer when it leaves.
             map.on('mouseleave', 'neighborhoods-layer', function () {
                 map.getCanvas().style.cursor = '';
+                popup.remove();
             });
         });
         this.setState({
