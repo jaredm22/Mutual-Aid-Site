@@ -14,7 +14,7 @@ const headingStyles = {
 }
 
 const paragraphStyles = {
-  marginBottom: 48,
+  marginBottfom: 48,
 }
 const codeStyles = {
   color: "#8A6534",

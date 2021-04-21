@@ -54,9 +54,10 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
 .heading {
   background: #fff;
   border-bottom: 1px solid #eee;
-  height: 60px;
-  line-height: 60px;
-  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 3em;
+  min-height: fit-content;
 }
 
 .mapboxgl-popup {
@@ -106,22 +107,6 @@ transform:none !important;
   background-color: #f8f8f8;
 }
 
-::-webkit-scrollbar {
-  width: 3px;
-  height: 3px;
-  border-left: 0;
-  background: rgba(0, 0, 0, 0.1);
-}
-
-::-webkit-scrollbar-track {
-  background: none;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #00853e;
-  border-radius: 0;
-}
-
 .clearfix { display: block; }
 
 .clearfix::after {
@@ -131,3 +116,51 @@ transform:none !important;
   clear: both;
   visibility: hidden;
 }
+
+.organization {
+  width: 100%;
+  min-height: fit-content;
+  display: flex;
+  flex-direction: row;
+}
+
+
+.organization-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+
+
+.organization-links {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 3rem;
+  text-align: center;
+}
+
+.organization-links a {
+  width: 100%;
+  border-radius: 25px;
+  background: lightblue;
+  color: black;
+  border: 1px solid black;
+  text-decoration: none;
+}
+
+.organization-links a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.organizations {
+
+}
+

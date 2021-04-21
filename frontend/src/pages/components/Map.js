@@ -3,8 +3,16 @@ import axios from 'axios';
 import '../index.css';
 import centroid from '@turf/centroid';
 import mapboxgl from 'mapbox-gl';
-import data from '../../data/neighborhoods'
+import data from '../../data/neighborhoods';
 import Form from './Form';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemtext';
+import Collapse from '@material-ui/core/Collapse';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 
   
 mapboxgl.accessToken = process.env.GATSBY_MAPBOX_ACCESS_TOKEN;
@@ -186,12 +194,12 @@ export default class Map extends React.Component {
                 <div className='sidebar'>
                     <div className='heading'>
                         <h1>Boston Mutual Aid</h1>
-                        <br></br>
+                        <Form></Form>
                     </div>
-                    <Form />
+                    
                     <div className="neighborhoods">
                         {this.state.dataLoaded ? 
-                            <Neighborhoods data={data} data2={this.state.organizationData}></Neighborhoods> :
+                            <Neighborhoods neighborhoodData={data} orgData={this.state.organizationData}></Neighborhoods> :
                             false
                         }
                     </div>
@@ -203,58 +211,124 @@ export default class Map extends React.Component {
 }
 
 
-function Organization (props) {
-    console.log("working")
-    console.log(props.org);
-    return(
-       <p>Working</p>
-    )
-}
 
 function Neighborhoods (props) {
-    const data = props.data;
-
-    const d = data.features.map((neighborhood) => {
+    const neighborhoodData = props.neighborhoodData;
+    
+    const d =  neighborhoodData.features.map((neighborhood) => {
         return neighborhood.properties.Name;
     });
     
     d.sort();
+    d.unshift('Boston-wide');
     console.log(d);
+    const o2 = props.orgData.find(i => {
+        return i.neighborhood.includes("Boston-wide");
+    });
+    console.log(o2)
 
-    console.log(data.features);
 
     const neighborhoods = [];
     d.forEach(name => {
-        const k = data.features.find(n => {
-            return n.properties.Name === name;
-        })
-        neighborhoods.push(k.properties);
+        if (name === "Boston-wide") {
+            const o = props.orgData.filter(i => {
+                return i.neighborhood.includes(name);
+            });
+            console.log(o);
+            const bw = {
+                Name: name,
+                orgs: o,
+            }
+            neighborhoods.push(bw);
+        } else {
+            const k = neighborhoodData.features.find(n => {
+                return n.properties.Name === name;
+            }).properties;
+            const o = props.orgData.filter(i => {
+                return i.neighborhood.includes(name);
+            });
+
+            console.log(k);
+            const nbh = {
+                Name: name, 
+                Neighborhood_ID: k.Neighborhood_ID,
+                orgs: o
+            }
+            neighborhoods.push(nbh);
+        }
     });
-    
-    // data.features.map((neighborhood) => {
-    //     console.log(neighborhood.properties);
-    //     var prop = neighborhood.properties;
-    //     return prop;
-    // });
-
-    // const neighborhoods = data.features.map((neighborhood) => {
-    //     console.log(neighborhood.properties);
-    //     var prop = neighborhood.properties;
-    //     return prop;
-    // });
-
-    const orgs = props.data2;
-    console.log(orgs);
 
     return (
-        <div className="neighborhoods" id="neighborhoods">
+        <List
+            component="div"
+            className="neighborhoods"
+            id="neighborhoods"
+        >
             {neighborhoods.map((neighborhood) => {
-                return (
-                    <div id={`neighborhood-${neighborhood.Neighborhood_ID}`} className="item">
-                        <h4>{neighborhood.Name}</h4>
-                    </div>
-                )
+                return (<Neighborhood neighborhood={neighborhood} orgs={neighborhood.orgs}/>);
             })}
-        </div>
+        </List>
     );
 }
+
+function Neighborhood(props) {
+    const [open, setOpen] = React.useState(true);
+  
+    const handleClick = () => {
+      setOpen(!open);
+    };
+  
+    console.log(props)
+
+    return (
+      <div>
+        <ListItem button onClick={handleClick}>
+          <ListItemText><h5>{props.neighborhood.Name}</h5></ListItemText>
+          {open ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+  
+        <Collapse in={props.neighborhood.Name == "Boston-wide" ? open : !open} timeout="auto" unmountOnExit>
+          {props.orgs.map((org) => {
+            return(
+              <ListItem>
+                <Organization org={org} />
+              </ListItem>);
+          })}
+        </Collapse>
+      </div>
+    );
+  }
+  
+//   function Organizations(props) {
+//     return (
+//       <Collapse in={open} timeout="auto" unmountOnExit>
+//           {props.orgs.map((org) => {
+//             return(
+//               <ListItem>
+//                 <Organization org={org} />
+//               </ListItem>);
+//           })}
+//       </Collapse>
+//     )
+//   }
+  
+  function Organization(props) {
+      const org = props.org;
+      console.log(org);
+  
+      return(
+        <Card className="organization">
+          <CardContent className="organization-info">
+            <h6>{org.name}</h6>
+            {org.email !== "" ? (<p>{org.email}</p>) : false}
+            {org.phone !== "" ? (<p>{org.phone}</p>)  : false}
+          </CardContent>
+  
+          <CardContent className="organization-links">
+            {org.website !== "" ? (<a href={org.website}>Website</a>)  : false}
+            {org.give_help !== "" ? (<a href={org.give_help}>Give Help</a>)  : false}
+            {org.need_help !== "" ? (<a href={org.need_help}>Get Help</a>)  : false}
+          </CardContent>
+        </Card>
+      )
+  }
