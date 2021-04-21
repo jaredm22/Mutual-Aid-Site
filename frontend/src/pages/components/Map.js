@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import axios from 'axios';
 import '../index.css';
 import centroid from '@turf/centroid';
@@ -103,6 +103,18 @@ export default class Map extends React.Component {
             // Change the cursor to a pointer when the mouse is over the states layer.
             map.on('mouseenter', 'neighborhoods-layer', function (e) {
                 map.getCanvas().style.cursor = 'pointer';
+
+                const coor = centroid(e.features[0]).geometry.coordinates;
+                const properties = e.features[0].properties;
+
+                while (Math.abs(e.lngLat.lng - coor[0]) > 180) {
+                    coor[0] += e.lngLat.lng > coor[0] ? 360 : -360;
+                }
+                
+                new mapboxgl.Popup({ closeOnMove:true, closeOnClick: false, offset: 25})
+                    .setLngLat(coor)
+                    .setHTML(`<h1>${properties.Name}</h1>`)
+                    .addTo(map);
             });
                 
             // Change it back to a pointer when it leaves.
