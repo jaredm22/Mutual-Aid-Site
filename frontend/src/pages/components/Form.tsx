@@ -15,6 +15,11 @@ interface FormState {
     website: string,
     need_help: string,
     give_help: string,
+    address_one: string,
+    address_two: string,
+    city: string,
+    state: string,
+    zip: string,
     show: boolean
 }
 
@@ -29,6 +34,11 @@ export class Form extends React.Component<FormProps, FormState> {
             website: '',
             need_help: '',
             give_help: '',
+            address_one: '',
+            address_two: '',
+            city: '',
+            state: '',
+            zip: '',
             show: false
         }
         this.state = initialState;
@@ -48,7 +58,7 @@ export class Form extends React.Component<FormProps, FormState> {
         e.preventDefault();
 
         axios({
-            url: 'http://localhost:8000/location/add',
+            url: 'http://localhost:5000/location/add',
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -61,11 +71,17 @@ export class Form extends React.Component<FormProps, FormState> {
                 email: this.state.email,
                 website: this.state.website,
                 need_help: this.state.need_help,
-                give_help: this.state.give_help
+                give_help: this.state.give_help,
+                address_one: this.state.address_one,
+                address_two: this.state.address_two,
+                city: this.state.city,
+                state: this.state.state,
+                zip: this.state.zip,
             }
         })
         .then((res:any) => {
             console.log('Successfully added')
+            this.handleClose()
         })
         .catch((err:any) => {
             console.log(err)
@@ -73,7 +89,7 @@ export class Form extends React.Component<FormProps, FormState> {
     }
 
     handleClose() {
-        this.setState({show: false, name: '', neighborhood: '', phone:'', email:'', website:'', need_help:'', give_help: ''})
+        this.setState({show: false, name: '', neighborhood: '', phone:'', email:'', website:'', need_help:'', give_help: '', address_one:'', address_two:'', city:'', state:'',zip:''})
     }
 
     handleShow() {
@@ -92,7 +108,7 @@ export class Form extends React.Component<FormProps, FormState> {
                         <form onSubmit={this.handleSubmit} noValidate>
                             <div className='name'>
                                 <label htmlFor='name'>Name</label>
-                                <input type='name' name='name' onChange={this.handleChange} />
+                                <input type='text' name='name' onChange={this.handleChange} />
                             </div>
                             <div className='neighborhood'>
                                 <label htmlFor='neighborhood'>Neighborhood</label>
@@ -125,7 +141,7 @@ export class Form extends React.Component<FormProps, FormState> {
                             </div>
                             <div className='phone'>
                                 <label htmlFor='phone'>Phone</label>
-                                <input type='phone' name='phone' onChange={this.handleChange} />
+                                <input type='number' name='phone' onChange={this.handleChange} />
                             </div>
                             <div className='email'>
                                 <label htmlFor='email'>Email</label>
@@ -133,15 +149,35 @@ export class Form extends React.Component<FormProps, FormState> {
                             </div>
                             <div className='website'>
                                 <label htmlFor='website'>Website</label>
-                                <input type='website' name='website' onChange={this.handleChange} />
+                                <input type='text' name='website' onChange={this.handleChange} />
                             </div>
                             <div className='need_help'>
                                 <label htmlFor='need_help'>Link for those who need help:</label>
-                                <input type='need_help' name='need_help' onChange={this.handleChange} />
+                                <input type='text' name='need_help' onChange={this.handleChange} />
                             </div>
                             <div className='give_help'>
                                 <label htmlFor='give_help'>Link for those who can help:</label>
-                                <input type='give_help' name='give_help' onChange={this.handleChange} />
+                                <input type='text' name='give_help' onChange={this.handleChange} />
+                            </div>
+                            <div className='address_one'>
+                                <label htmlFor='address_one'>Address Line 1</label>
+                                <input type='text' name='address_one' onChange={this.handleChange} />
+                            </div>
+                            <div className='address_two'>
+                                <label htmlFor='address_two'>Address Line 2</label>
+                                <input type='text' name='address_two' onChange={this.handleChange} />
+                            </div>
+                            <div className='city'>
+                                <label htmlFor='city'>City</label>
+                                <input type='text' name='city' onChange={this.handleChange} />
+                            </div>
+                            <div className='state'>
+                                <label htmlFor='state'>State</label>
+                                <input type='text' name='state' onChange={this.handleChange} />
+                            </div>
+                            <div className='zipp'>
+                                <label htmlFor='zip'>Zip</label>
+                                <input type='text' name='zip' onChange={this.handleChange} />
                             </div>
                             <div className='captcha'>
                                 ***INPUT CAPTCHA HERE***
