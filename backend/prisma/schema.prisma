@@ -16,4 +16,9 @@ model MutualAid {
   website      String
   need_help    String
   give_help    String
+  address_one  String
+  address_two  String
+  city         String
+  state        String
+  zip          String
 }
