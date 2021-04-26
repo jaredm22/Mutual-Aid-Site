@@ -40,6 +40,7 @@ The site will be running on localhost:8000.
 `npx prisma studio`
 
 ## Run backend commands
+* In the \backend\prisma, run `npx prisma generate`
 * `npm install`
 * `npx ts-node .`
 
