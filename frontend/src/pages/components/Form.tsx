@@ -2,6 +2,17 @@ import React from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { TextField } from '@material-ui/core';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import ListItemText from '@material-ui/core/ListItemText';
+import Select from '@material-ui/core/Select';
+import Checkbox from '@material-ui/core/Checkbox';
+import Chip from '@material-ui/core/Chip';
+import './form.css';
+
 
 // Defining types for props and state
 interface FormProps {
@@ -9,7 +20,7 @@ interface FormProps {
 
 interface FormState {
     name: string,
-    neighborhood: string,
+    neighborhood: Array<string>,
     phone: string,
     email: string,
     website: string,
@@ -23,12 +34,53 @@ interface FormState {
     show: boolean
 }
 
+const neighborhoods = [
+    "Boston-wide",
+    "Allston",
+    "Back Bay",
+    "Bay Village",
+    "Beacon Hill",
+    "Brighton",
+    "Charlestown",
+    "Chinatown",
+    "Dorchester",
+    "Downtown",
+    "East Boston",
+    "Fenway",
+    "Harbor Islands",
+    "Hyde Park",
+    "Jamaica Plain",
+    "Leather District",
+    "Longwood",
+    "Mattapan",
+    "Mission Hill",
+    "North End",
+    "Roslindale",
+    "Roxbury",
+    "South Boston",
+    "South Boston Waterfront",
+    "South End",
+    "West End",
+    "West Roxbury"
+]
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
 export class Form extends React.Component<FormProps, FormState> {
     constructor(props: FormProps) {
         super(props);
         const initialState = {
             name: '',
-            neighborhood: 'boston wide',
+            neighborhood: ['Boston-wide'],
             phone: '',
             email: '',
             website: '',
@@ -48,11 +100,13 @@ export class Form extends React.Component<FormProps, FormState> {
         this.handleShow = this.handleShow.bind(this);
     }
 
+
     handleChange = (e: any) => {
         e.preventDefault();
         const { name, value } = e.target;
         this.setState(Object.assign(this.state, {[name]: value}));
     }
+    
 
     handleSubmit = (e: any) => {
         e.preventDefault();
@@ -66,7 +120,7 @@ export class Form extends React.Component<FormProps, FormState> {
             },
             data: {
                 name: this.state.name,
-                neighborhood: this.state.neighborhood,
+                neighborhood: this.state.neighborhood.join(),
                 phone: this.state.phone,
                 email: this.state.email,
                 website: this.state.website,
@@ -89,7 +143,7 @@ export class Form extends React.Component<FormProps, FormState> {
     }
 
     handleClose() {
-        this.setState({show: false, name: '', neighborhood: '', phone:'', email:'', website:'', need_help:'', give_help: '', address_one:'', address_two:'', city:'', state:'',zip:''})
+        this.setState({show: false, name: '', neighborhood: ['Boston-wide'], phone:'', email:'', website:'', need_help:'', give_help: '', address_one:'', address_two:'', city:'', state:'',zip:''})
     }
 
     handleShow() {
@@ -97,88 +151,175 @@ export class Form extends React.Component<FormProps, FormState> {
     }
 
     render() {
+        var { name, neighborhood, phone, email, website, need_help, give_help, address_one, address_two, city, state, zip } = this.state
+        console.log(this.state);
         return(
-            <div className='form-wrapper'>
-                <Button className="btn-primary" variant="light" onClick={this.handleShow}>Add Location</Button>
+            <div className='form-container'>
+                <Button className="btn-primary" variant="light" onClick={this.handleShow}>Add Organization</Button>
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Add Location</Modal.Title>
+                        <Modal.Title>Add Organization</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <form onSubmit={this.handleSubmit} noValidate>
-                            <div className='name'>
-                                <label htmlFor='name'>Name</label>
-                                <input type='text' name='name' onChange={this.handleChange} />
+                        <form onSubmit={this.handleSubmit} noValidate className="form">
+                            <div className="input-wrapper">
+                                <TextField
+                                    id="name"
+                                    className="input-box"
+                                    name="name"
+                                    label="Name"
+                                    value={name}
+                                    variant="outlined"
+                                    onChange={this.handleChange} 
+                                />
                             </div>
-                            <div className='neighborhood'>
-                                <label htmlFor='neighborhood'>Neighborhood</label>
-                                <select value={this.state.neighborhood} name="neighborhood" onChange={this.handleChange}>
-                                    <option value="boston wide">Boston Wide</option>
-                                    <option value="allston">Allston</option>
-                                    <option value="back bay">Back Bay</option>
-                                    <option value="bay village">Bay Village</option>
-                                    <option value="beacon hill">Beacon Hill</option>
-                                    <option value="brighton">Brighton</option>
-                                    <option value="charlestown">Charlestown</option>
-                                    <option value="chinatown">Chinatown</option>
-                                    <option value="dorchester">Dorchester</option>
-                                    <option value="downtown">Downtown</option>
-                                    <option value="east boston">East Boston</option>
-                                    <option value="fenway-kenmore">Fenway-Kenmore</option>
-                                    <option value="hyde park">Hyde Park</option>
-                                    <option value="jamaica plain">Jamaica Plain</option>
-                                    <option value="mattapan">Mattapan</option>
-                                    <option value="mission hill">Mission Hill</option>
-                                    <option value="north end">North End</option>
-                                    <option value="rosindale">Rosindale</option>
-                                    <option value="roxbury">Roxbury</option>
-                                    <option value="south boston">South Boston</option>
-                                    <option value="south end">South End</option>
-                                    <option value="west end">West End</option>
-                                    <option value="west roxbury">West Roxbury</option>
-                                    <option value="wharf district">Wharf District</option>
-                                </select>
+                            
+                            <div className="input-wrapper">
+                                <TextField
+                                    id="email"
+                                    className="input-box"
+                                    name="email"
+                                    label="Email"
+                                    value={email}
+                                    variant="outlined"
+                                    onChange={this.handleChange} 
+                                />
+                                <TextField
+                                    id="phone"
+                                    name="phone"
+                                    className="input-box"
+                                    label="Phone"
+                                    value={phone}
+                                    variant="outlined"
+                                    onChange={this.handleChange} 
+                                />
                             </div>
-                            <div className='phone'>
-                                <label htmlFor='phone'>Phone</label>
-                                <input type='number' name='phone' onChange={this.handleChange} />
+
+                            <div className="input-wrapper">
+                                <TextField
+                                    id="website"
+                                    className="input-box"
+                                    name="website"
+                                    label="Website"
+                                    value={website}
+                                    variant="outlined"
+                                    onChange={this.handleChange} 
+                                />
                             </div>
-                            <div className='email'>
-                                <label htmlFor='email'>Email</label>
-                                <input type='email' name='email' onChange={this.handleChange} />
+
+                            <div className="input-wrapper">
+                                <TextField
+                                    id="need-help"
+                                    className="input-box"
+                                    name="need_help"
+                                    label="Link for those who are looking for aid"
+                                    value={need_help}
+                                    variant="outlined"
+                                    onChange={this.handleChange} 
+                                />
                             </div>
-                            <div className='website'>
-                                <label htmlFor='website'>Website</label>
-                                <input type='text' name='website' onChange={this.handleChange} />
+
+                            <div className="input-wrapper">
+                                <TextField
+                                    id="give-help"
+                                    className="input-box"
+                                    name="give_help"
+                                    label="Link for those who are looking to help"
+                                    value={give_help}
+                                    variant="outlined"
+                                    onChange={this.handleChange} 
+                                />
                             </div>
-                            <div className='need_help'>
-                                <label htmlFor='need_help'>Link for those who need help:</label>
-                                <input type='text' name='need_help' onChange={this.handleChange} />
+
+                            <div className="input-wrapper">
+                                <TextField
+                                    id="address_one"
+                                    className="input-box"
+                                    name="address_one"
+                                    label="Address 1"
+                                    value={address_one}
+                                    variant="outlined"
+                                    onChange={this.handleChange} 
+                                />
                             </div>
-                            <div className='give_help'>
-                                <label htmlFor='give_help'>Link for those who can help:</label>
-                                <input type='text' name='give_help' onChange={this.handleChange} />
+
+                            <div className="input-wrapper">
+                                <TextField
+                                    id="address_two"
+                                    className="input-box"
+                                    name="address_two"
+                                    label="Address 2"
+                                    value={address_two}
+                                    variant="outlined"
+                                    onChange={this.handleChange} 
+                                />
                             </div>
-                            <div className='address_one'>
-                                <label htmlFor='address_one'>Address Line 1</label>
-                                <input type='text' name='address_one' onChange={this.handleChange} />
+                               
+                            <div className="input-wrapper">
+                                <TextField
+                                    id="city"
+                                    className="input-box"
+                                    name="city"
+                                    label="City"
+                                    value={city}
+                                    variant="outlined"
+                                    onChange={this.handleChange} 
+                                />
                             </div>
-                            <div className='address_two'>
-                                <label htmlFor='address_two'>Address Line 2</label>
-                                <input type='text' name='address_two' onChange={this.handleChange} />
+
+                            <div className="input-wrapper">
+                                <TextField
+                                    id="state"
+                                    className="input-box"
+                                    name="state"
+                                    label="State"
+                                    value={state}
+                                    variant="outlined"
+                                    onChange={this.handleChange} 
+                                />
                             </div>
-                            <div className='city'>
-                                <label htmlFor='city'>City</label>
-                                <input type='text' name='city' onChange={this.handleChange} />
+                            
+                            <div className="input-wrapper">
+                                <TextField
+                                    id="zip"
+                                    className="input-box"
+                                    name="zip"
+                                    label="Zip"
+                                    value={zip}
+                                    variant="outlined"
+                                    onChange={this.handleChange} 
+                                />
                             </div>
-                            <div className='state'>
-                                <label htmlFor='state'>State</label>
-                                <input type='text' name='state' onChange={this.handleChange} />
-                            </div>
-                            <div className='zipp'>
-                                <label htmlFor='zip'>Zip</label>
-                                <input type='text' name='zip' onChange={this.handleChange} />
-                            </div>
+
+                            <div>
+                                <FormControl>
+                                    <InputLabel id="demo-mutiple-chip-label">Chip</InputLabel>
+                                    <Select
+                                        labelId="demo-mutiple-chip-label"
+                                        id="demo-mutiple-chip"
+                                        multiple
+                                        name="neighborhood"
+                                        value={neighborhood}
+                                        onChange={this.handleChange}
+                                        input={<Input id="select-multiple-chip" />}
+                                        renderValue={(selected) => (
+                                            <div>
+                                                {selected.map((value) => (
+                                                    <Chip key={value} label={value}/>
+                                                ))}
+                                            </div>
+                                        )}
+                                        MenuProps={MenuProps}
+                                    >
+                                        {neighborhoods.map((n) => (
+                                            <MenuItem key={n} value={n} >
+                                                {n}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </div> 
+                        
                             <div className='captcha'>
                                 ***INPUT CAPTCHA HERE***
                             </div>

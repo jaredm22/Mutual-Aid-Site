@@ -23,15 +23,15 @@ export default class Map extends React.Component {
         this.state = {
             organizationData: null,
             dataLoaded: false,
-            lng: -70.9,
-            lat: 42.35,
-            zoom: 9
+            lng: -71.073,
+            lat: 42.319,
+            zoom: 11
         };
     }
 
     async componentDidMount() {
         const res = await axios.get("http://localhost:5000/listAllLocations");
-        const organization_data = res.data
+        const organization_data = res.data;
         console.log(organization_data);
         
         // const bostonZipCodes = ["02128", "02126", "02136", "02122", "02124", "02121", "02125", "02131", "02119", "02120", "02132", "02111", "02118", "02130", "02127", "02210", "02163", "02134", "02135", "02129", "02108", "02114", "02116", "02199", "02222", "02109", "02110", "02113", "02115", "02215"]
@@ -75,6 +75,11 @@ export default class Map extends React.Component {
                 }
             });
 
+            var popup = new mapboxgl.Popup({
+                closeButton: false,
+                closeOnClick: false
+            });
+
             map.on('click', 'neighborhoods-layer', function (e) {
 
                 const coor = centroid(e.features[0]).geometry.coordinates;
@@ -93,16 +98,12 @@ export default class Map extends React.Component {
                     coor[0] += e.lngLat.lng > coor[0] ? 360 : -360;
                 }
                 
-                new mapboxgl.Popup({ closeOnClick: true, offset: 25})
+                popup
                     .setLngLat(coor)
-                    .setHTML(`<h1>${properties.Name}</h1>`)
+                    .setHTML(`<h3>${properties.Name}</h3>`)
                     .addTo(map);
             });
 
-            var popup = new mapboxgl.Popup({
-                closeButton: false,
-                closeOnClick: false
-            });
 
             // Change the cursor to a pointer when the mouse is over the states layer.
             map.on('mouseenter', 'neighborhoods-layer', function (e) {
@@ -117,7 +118,7 @@ export default class Map extends React.Component {
                 
                 popup
                     .setLngLat(coor)
-                    .setHTML(`<h1>${properties.Name}</h1>`)
+                    .setHTML(`<h3>${properties.Name}</h3>`)
                     .addTo(map);
             });
                 
@@ -134,7 +135,6 @@ export default class Map extends React.Component {
     }
 
     render() {
-        console.log(this.state.organizationData);
         return (
             <div className="main-container">
                 <div className='sidebar'>
@@ -160,38 +160,40 @@ export default class Map extends React.Component {
 
 function Neighborhoods (props) {
     const neighborhoodData = props.neighborhoodData;
+    console.log(neighborhoodData)
     
     const d =  neighborhoodData.features.map((neighborhood) => {
         return neighborhood.properties.Name;
     });
     
+    console.log(d);
     d.sort();
     d.unshift('Boston-wide');
 
     const neighborhoods = [];
     d.forEach(name => {
         if (name === "Boston-wide") {
-            const o = props.orgData.filter(i => {
+            const orgs = props.orgData.filter(i => {
                 return i.neighborhood.includes(name);
             });
-            console.log(o);
             const bw = {
                 Name: name,
-                orgs: o,
+                orgs: orgs,
             }
             neighborhoods.push(bw);
         } else {
             const k = neighborhoodData.features.find(n => {
                 return n.properties.Name === name;
             }).properties;
-            const o = props.orgData.filter(i => {
+
+            const orgs = props.orgData.filter(i => {
                 return i.neighborhood.includes(name);
             });
 
             const nbh = {
                 Name: name, 
                 Neighborhood_ID: k.Neighborhood_ID,
-                orgs: o
+                orgs: orgs
             }
             neighborhoods.push(nbh);
         }
@@ -204,7 +206,7 @@ function Neighborhoods (props) {
             id="neighborhoods"
         >
             {neighborhoods.map((neighborhood) => {
-                return (<Neighborhood key={neighborhood.Neighborhood_ID} neighborhood={neighborhood} orgs={neighborhood.orgs}/>);
+                return (<Neighborhood key={`neighborhood-${neighborhood.Neighborhood_ID}`} neighborhood={neighborhood} orgs={neighborhood.orgs}/>);
             })}
         </List>
     );
@@ -212,6 +214,9 @@ function Neighborhoods (props) {
 
 function Neighborhood(props) {
     const [open, setOpen] = React.useState(true);
+    props.orgs.forEach((n)=>{
+        console.log(n)
+    });
   
     const handleClick = () => {
       setOpen(!open);
@@ -219,7 +224,7 @@ function Neighborhood(props) {
 
     return (
       <div>
-        <ListItem button onClick={handleClick} id={`neighborhood-${props.neighborhood.Name === "Boston-wide" ? 1 : props.neighborhood.Neighborhood_ID }`}>
+        <ListItem button onClick={handleClick} id={`neighborhood-${props.neighborhood.Name === "Boston-wide" ? 0 : props.neighborhood.Neighborhood_ID }`}>
           <ListItemText><h5>{props.neighborhood.Name}</h5></ListItemText>
           {open ? <ExpandMore /> : <ExpandLess />}
         </ListItem>
@@ -227,8 +232,8 @@ function Neighborhood(props) {
         <Collapse in={!open} timeout="auto" unmountOnExit>
           {props.orgs.length !== 0 ? (props.orgs.map((org) => {
             return(
-              <ListItem>
-                <Organization key={`org-${org.Name}`} org={org} />
+              <ListItem key={`org-${org.id}`}>
+                <Organization key={`org-${org.name}`} org={org} />
               </ListItem>);
             })): 
 
