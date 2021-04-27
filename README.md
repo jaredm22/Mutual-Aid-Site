@@ -31,14 +31,14 @@ The site will be running on localhost:8000.
 
 ### Backend
 1. In the \backend\prisma
-   ```bash
-   $ npx prisma generate
-   ```
+```bash
+$ npx prisma generate
+```
 2. In the \backend
-   ```bash
-   $ npm install
-   $ npx ts-node .
-   ```
+```bash
+$ npm install
+$ npx ts-node .
+```
 ## Other Backend Commands
 ### Migrate models to Postgresql on Heroku
 `npx prisma db push --preview-feature`
