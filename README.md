@@ -43,7 +43,7 @@ The site will be running on localhost:8000.
 ### Migrate models to Postgresql on Heroku
 `npx prisma db push --preview-feature`
 ### Update database to reflect prisma schema
-`prisma generate`
+`npx prisma generate`
 ### Open Prisma studio
 `npx prisma studio`
 ### Import mutual aid locations from CSV to database
