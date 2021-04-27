@@ -46,7 +46,7 @@ The site will be running on localhost:8000.
 `prisma generate`
 ### Open Prisma studio
 `npx prisma studio`
-## Import mutual aid locations from CSV to database
+### Import mutual aid locations from CSV to database
 `npx ts-node script.ts`
 
 
