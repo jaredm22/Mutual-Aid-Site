@@ -41,9 +41,7 @@ The site will be running on localhost:8000.
    $ npm install
    $ npx ts-node .
    ```
-### Other Backend Commands
-
-## Prisma Commands
+## Other Backend Commands
 ### Migrate models to Postgresql on Heroku
 `npx prisma db push --preview-feature`
 ### Update database to reflect prisma schema
