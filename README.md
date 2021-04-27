@@ -30,8 +30,6 @@ npm run develop
 The site will be running on localhost:8000. 
 
 ### Backend
-
-## Run backend commands
 1. In the \backend\prisma
    ```bash
    $ npx prisma generate
