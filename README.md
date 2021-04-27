@@ -14,6 +14,17 @@ We used Prisma as an ORM, Express.js for the backend server, and React for the f
 
 ## Quickstart
 
+### Backend
+1. Add DATABASE_URL to .env file in \backend 
+2. In the \backend\prisma
+```bash
+$ npx prisma generate
+```
+3. In the \backend
+```bash
+$ npm install
+$ npx ts-node .
+```
 ### Frontend
 1. Add REACT_APP_GOOGLE_KEY to .env file in \frontend
 2. Go into frontend folder
@@ -30,17 +41,6 @@ $ npm run develop
 ```
 The site will be running on localhost:8000. 
 
-### Backend
-1. Add DATABASE_URL to .env file in \backend 
-2. In the \backend\prisma
-```bash
-$ npx prisma generate
-```
-3. In the \backend
-```bash
-$ npm install
-$ npx ts-node .
-```
 ## Other Backend Commands
 ### Migrate models to Postgresql on Heroku
 `npx prisma db push --preview-feature`
