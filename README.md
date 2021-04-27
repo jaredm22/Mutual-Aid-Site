@@ -31,6 +31,18 @@ The site will be running on localhost:8000.
 
 ### Backend
 
+## Run backend commands
+1. In the \backend\prisma
+   ```bash
+   $ npx prisma generate
+   ```
+2. In the \backend
+   ```bash
+   $ npm install
+   $ npx ts-node .
+   ```
+### Other Backend Commands
+
 ## Prisma Commands
 ### Migrate models to Postgresql on Heroku
 `npx prisma db push --preview-feature`
@@ -38,12 +50,6 @@ The site will be running on localhost:8000.
 `prisma generate`
 ### Open Prisma studio
 `npx prisma studio`
-
-## Run backend commands
-* In the \backend\prisma, run `npx prisma generate`
-* `npm install`
-* `npx ts-node .`
-
 ## Import mutual aid locations from CSV to database
 `npx ts-node script.ts`
 
