@@ -14,6 +14,7 @@ import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import logo from '../../images/julia1.jpg';
   
 mapboxgl.accessToken = process.env.GATSBY_MAPBOX_ACCESS_TOKEN;
 export default class Map extends React.Component {
@@ -139,7 +140,11 @@ export default class Map extends React.Component {
             <div className="main-container">
                 <div className='sidebar'>
                     <div className='heading'>
-                        <h1>Boston Mutual Aid</h1>
+                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", alignItems: "center" }}>
+                            <img className="logo" src={logo} style={{paddingRight: "20px"}}></img>
+                            <h2>Boston Mutual Aid</h2>
+                        </div>
+                        
                         <Form></Form>
                     </div>
                     
@@ -233,7 +238,7 @@ function Neighborhood(props) {
           {props.orgs.length !== 0 ? (props.orgs.map((org) => {
             return(
               <ListItem key={`org-${org.id}`}>
-                <Organization key={`org-${org.name}`} org={org} />
+                <Organization key={`org-${org.name}`} neighborhood={props.neighborhood.Name} org={org} />
               </ListItem>);
             })): 
 
@@ -245,26 +250,14 @@ function Neighborhood(props) {
     );
   }
   
-//   function Organizations(props) {
-//     return (
-//       <Collapse in={open} timeout="auto" unmountOnExit>
-//           {props.orgs.map((org) => {
-//             return(
-//               <ListItem>
-//                 <Organization org={org} />
-//               </ListItem>);
-//           })}
-//       </Collapse>
-//     )
-//   }
-  
   function Organization(props) {
       const org = props.org;
   
       return(
         <Card className="organization">
           <CardContent className="organization-info">
-            <h6>{org.name}</h6>
+            <h5>{org.name}</h5>
+            <p>{props.neighborhood}</p>
             {org.email !== "" ? (<p>{org.email}</p>) : false}
             {org.phone !== "" ? (<p>{org.phone}</p>)  : false}
           </CardContent>
