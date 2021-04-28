@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Recaptcha from 'react-recaptcha';
-import { TextField } from '@material-ui/core';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { requirePropFactory, TextField } from '@material-ui/core';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -109,7 +110,6 @@ export class Form extends React.Component<FormProps, FormState> {
 
     handleSubmit = (e: any) => {
         e.preventDefault();
-
         axios({
             url: 'http://localhost:5000/location/add',
             method: 'POST',
@@ -147,6 +147,10 @@ export class Form extends React.Component<FormProps, FormState> {
 
     handleShow() {
         this.setState({show: true})
+    }
+
+    onChange(value) {
+        console.log("Captcha Value:", value);
     }
 
     render() {
@@ -321,13 +325,16 @@ export class Form extends React.Component<FormProps, FormState> {
                             </div> 
                         
                             <div className='captcha'>
-                                <Recaptcha
+                                {/* <Recaptcha
                                     sitekey={sitekey}
                                     render="explicit"
                                     onloadCallback={function () {
                                         console.log('test');
                                     }}
-                                    />
+                                    /> */}
+
+                                <ReCAPTCHA sitekey={sitekey} onChange={this.onChange}/>
+                                
                             </div>
                             <div className='submit'>
                                 <button>Submit</button>
