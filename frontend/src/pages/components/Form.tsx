@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Recaptcha from 'react-recaptcha';
 import { TextField } from '@material-ui/core';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -153,8 +154,10 @@ export class Form extends React.Component<FormProps, FormState> {
     render() {
         var { name, neighborhood, phone, email, website, need_help, give_help, address_one, address_two, city, state, zip } = this.state
         console.log(this.state);
+        let sitekey = process.env.SITE_KEY;
         return(
             <div className='form-container'>
+                <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
                 <Button className="btn-primary" variant="light" onClick={this.handleShow}>Add Organization</Button>
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
@@ -321,7 +324,13 @@ export class Form extends React.Component<FormProps, FormState> {
                             </div> 
                         
                             <div className='captcha'>
-                                ***INPUT CAPTCHA HERE***
+                                <Recaptcha
+                                    sitekey={sitekey}
+                                    render="explicit"
+                                    onloadCallback={function () {
+                                        console.log('test');
+                                    }}
+                                    />
                             </div>
                             <div className='submit'>
                                 <button>Submit</button>
