@@ -38,6 +38,7 @@ $ npm install
 $ npm run develop
 ```
 The site should be running on [http://0.0.0.0:8000](http://0.0.0.0:8000)
+Make sure to have backend running before running the frontend.
 
 ### Backend
 1. Go into backend folder
