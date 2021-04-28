@@ -214,7 +214,7 @@ export class Form extends React.Component<FormProps, FormState> {
                                     id="need-help"
                                     className="input-box"
                                     name="need_help"
-                                    label="Link for those who are looking for aid"
+                                    label="Request Aid Form URL"
                                     value={need_help}
                                     variant="outlined"
                                     onChange={this.handleChange} 
@@ -226,7 +226,7 @@ export class Form extends React.Component<FormProps, FormState> {
                                     id="give-help"
                                     className="input-box"
                                     name="give_help"
-                                    label="Link for those who are looking to help"
+                                    label="Offer Aid Form URL"
                                     value={give_help}
                                     variant="outlined"
                                     onChange={this.handleChange} 
