@@ -13,7 +13,6 @@ import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
 import './form.css';
 
-
 // Defining types for props and state
 interface FormProps {
 }
@@ -156,7 +155,6 @@ export class Form extends React.Component<FormProps, FormState> {
     render() {
         var { name, neighborhood, phone, email, website, need_help, give_help, address_one, address_two, city, state, zip } = this.state
         console.log(this.state);
-        let sitekey = process.env.SITE_KEY;
         return(
             <div className='form-container'>
                 <Button id="add-org-button" className="btn-primary" variant="light" onClick={this.handleShow}><h6>Add a Mutual Aid Organization</h6></Button>
@@ -333,7 +331,7 @@ export class Form extends React.Component<FormProps, FormState> {
                                     }}
                                     /> */}
 
-                                <ReCAPTCHA sitekey={sitekey} onChange={this.onChange}/>
+                                <ReCAPTCHA sitekey={process.env.SITE_KEY} onChange={this.onChange}/>
                                 
                             </div>
                             <div className='submit'>
