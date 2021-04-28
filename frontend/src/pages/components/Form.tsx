@@ -8,9 +8,7 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import ListItemText from '@material-ui/core/ListItemText';
 import Select from '@material-ui/core/Select';
-import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
 import './form.css';
 
@@ -157,8 +155,7 @@ export class Form extends React.Component<FormProps, FormState> {
         let sitekey = process.env.SITE_KEY;
         return(
             <div className='form-container'>
-                <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
-                <Button className="btn-primary" variant="light" onClick={this.handleShow}>Add Organization</Button>
+                <Button id="add-org-button" className="btn-primary" variant="light" onClick={this.handleShow}><h6>Add a Mutual Aid Organization</h6></Button>
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Add Organization</Modal.Title>
@@ -296,7 +293,7 @@ export class Form extends React.Component<FormProps, FormState> {
 
                             <div>
                                 <FormControl>
-                                    <InputLabel id="demo-mutiple-chip-label">Chip</InputLabel>
+                                    <InputLabel id="demo-mutiple-chip-label">Neighborhood</InputLabel>
                                     <Select
                                         labelId="demo-mutiple-chip-label"
                                         id="demo-mutiple-chip"

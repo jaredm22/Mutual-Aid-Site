@@ -30,3 +30,15 @@
     height: 50px;
 }
 
+#add-org-button {
+    background: #0054A5;
+    color: white;
+    border: none;
+    margin-top: 10px;
+}
+
+#add-org-button:hover {
+    background: #007ef4;
+    color: white;
+    border: none;
+}

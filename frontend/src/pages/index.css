@@ -14,6 +14,11 @@ body {
   width: 100%;
 }
 
+.logo {
+  height: 120px;
+  width: 200px;
+}
+
 h1 {
   font-size: 22px;
   margin: 0;
@@ -63,18 +68,11 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
 }
 
 .heading {
-  background: #fff;
+  background: #F46F20;
+  color: white;
   border-bottom: 1px solid #eee;
   padding: 3em;
-  min-height: fit-content;
 }
-
-
-/* .mapboxgl-popup{
-  left: auto;
-  right: auto;
-  transform:none !important;
-} */
 
 .neighborhoods {
   height: 100%;
@@ -109,46 +107,43 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
   width: 100%;
   min-height: fit-content;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  border-right: 20px solid #4da6ff;
 }
-
 
 .organization-info {
   width: 100%;
+  min-height: fit-content;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  text-align: center;
+  align-items: left;
+  text-align: left;
 }
-
-
 
 .organization-links {
   width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: left;
   padding: 3rem;
   text-align: center;
+  min-height: fit-content;
 }
 
 .organization-links a {
-  width: 100%;
+  width: fit-content;
   border-radius: 25px;
-  background: lightblue;
+  padding: 5px 10px;
+  margin-right: 5px;
   color: black;
-  border: 1px solid black;
+  border: 3px solid #4da6ff;
   text-decoration: none;
 }
 
 .organization-links a:hover {
   text-decoration: none;
   color: white;
-}
-
-.organizations {
-
+  background: #4da6ff;
 }
 
