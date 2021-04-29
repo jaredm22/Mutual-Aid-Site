@@ -158,6 +158,7 @@ export class Form extends React.Component<FormProps, FormState> {
     }
 
     onChange(value) {
+        // let result = validateHuman(value); 
         console.log("Captcha Value:", value);
     }
 

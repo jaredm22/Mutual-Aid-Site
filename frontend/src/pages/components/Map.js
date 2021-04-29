@@ -34,7 +34,7 @@ export default class Map extends React.Component {
     async componentDidMount() {
         const res = await axios.get("http://localhost:5000/listAllLocations");
         const organization_data = res.data;
-        console.log(organization_data);
+        // console.log(organization_data);
         
         // const bostonZipCodes = ["02128", "02126", "02136", "02122", "02124", "02121", "02125", "02131", "02119", "02120", "02132", "02111", "02118", "02130", "02127", "02210", "02163", "02134", "02135", "02129", "02108", "02114", "02116", "02199", "02222", "02109", "02110", "02113", "02115", "02215"]
                 
@@ -175,13 +175,13 @@ export default class Map extends React.Component {
 
 function Neighborhoods (props) {
     const neighborhoodData = props.neighborhoodData;
-    console.log(neighborhoodData)
+    // console.log(neighborhoodData);
     
     const d =  neighborhoodData.features.map((neighborhood) => {
         return neighborhood.properties.Name;
     });
     
-    console.log(d);
+    // console.log(d);
     d.sort();
     d.unshift('Boston-wide');
 
@@ -230,7 +230,7 @@ function Neighborhoods (props) {
 function Neighborhood(props) {
     const [open, setOpen] = React.useState(true);
     props.orgs.forEach((n)=>{
-        console.log(n)
+        // console.log(n)
     });
   
     const handleClick = () => {
