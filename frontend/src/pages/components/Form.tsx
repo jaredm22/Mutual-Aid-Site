@@ -127,7 +127,7 @@ export class Form extends React.Component<FormProps, FormState> {
             data: {
                 name: this.state.name,
                 neighborhood: this.state.neighborhood.join(),
-                phone: this.state.phone,
+                phone: phone,
                 email: this.state.email,
                 website: this.state.website,
                 need_help: this.state.need_help,
