@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import Recaptcha from 'react-recaptcha';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { requirePropFactory, TextField } from '@material-ui/core';
 import Input from '@material-ui/core/Input';
@@ -15,6 +14,7 @@ import './form.css';
 
 // Defining types for props and state
 interface FormProps {
+    parentCallback: Function,
 }
 
 interface FormState {
@@ -132,8 +132,8 @@ export class Form extends React.Component<FormProps, FormState> {
             }
         })
         .then((res:any) => {
-            console.log('Successfully added')
-            this.handleClose()
+            console.log('Successfully added');
+            this.handleClose();
         })
         .catch((err:any) => {
             console.log(err)
@@ -158,7 +158,7 @@ export class Form extends React.Component<FormProps, FormState> {
         return(
             <div className='form-container'>
                 <Button id="add-org-button" className="btn-primary" variant="light" onClick={this.handleShow}><h6>Add a Mutual Aid Organization</h6></Button>
-                <Modal show={this.state.show} onHide={this.handleClose}>
+                <Modal className="" show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Add Organization</Modal.Title>
                     </Modal.Header>
@@ -323,19 +323,11 @@ export class Form extends React.Component<FormProps, FormState> {
                             </div> 
                         
                             <div className='captcha'>
-                                {/* <Recaptcha
-                                    sitekey={sitekey}
-                                    render="explicit"
-                                    onloadCallback={function () {
-                                        console.log('test');
-                                    }}
-                                    /> */}
-
                                 <ReCAPTCHA sitekey={process.env.SITE_KEY} onChange={this.onChange}/>
-                                
                             </div>
+
                             <div className='submit'>
-                                <button>Submit</button>
+                                <button className="submit-button">Submit</button>
                             </div>
                         </form>
                     </Modal.Body>

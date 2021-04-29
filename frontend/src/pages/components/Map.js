@@ -145,7 +145,7 @@ export default class Map extends React.Component {
                             <h2>Boston Mutual Aid</h2>
                         </div>
                         
-                        <Form></Form>
+                        <Form/>
                     </div>
                     
                     <div className="neighborhoods">
