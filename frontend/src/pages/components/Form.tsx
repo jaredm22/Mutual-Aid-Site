@@ -108,6 +108,14 @@ export class Form extends React.Component<FormProps, FormState> {
     
 
     handleSubmit = (e: any) => {
+        // Change phone number format
+        let phone = "("
+        phone+= this.state.phone.substring(0,3)
+        phone+= ") "
+        phone+= this.state.phone.substring(3,6)
+        phone+= "-"
+        phone+= this.state.phone.substring(6,10)
+        console.log(phone)
         e.preventDefault();
         axios({
             url: 'http://localhost:5000/location/add',
@@ -134,6 +142,7 @@ export class Form extends React.Component<FormProps, FormState> {
         .then((res:any) => {
             console.log('Successfully added');
             this.handleClose();
+            this.props.parentCallback();
         })
         .catch((err:any) => {
             console.log(err)
@@ -154,7 +163,6 @@ export class Form extends React.Component<FormProps, FormState> {
 
     render() {
         var { name, neighborhood, phone, email, website, need_help, give_help, address_one, address_two, city, state, zip } = this.state
-        console.log(this.state);
         return(
             <div className='form-container'>
                 <Button id="add-org-button" className="btn-primary" variant="light" onClick={this.handleShow}><h6>Add a Mutual Aid Organization</h6></Button>

@@ -28,6 +28,7 @@ export default class Map extends React.Component {
             lat: 42.319,
             zoom: 11
         };
+        this.updateInformation = this.updateInformation.bind(this);
     }
 
     async componentDidMount() {
@@ -132,7 +133,16 @@ export default class Map extends React.Component {
         this.setState({
             organizationData: organization_data,
             dataLoaded: true,
-        })
+        })    
+    }
+
+    async updateInformation() {
+        const res = await axios.get("http://localhost:5000/listAllLocations");
+        const organization_data = res.data;
+        this.setState({
+            organizationData: organization_data,
+            dataLoaded: true,
+        })   
     }
 
     render() {
@@ -145,7 +155,7 @@ export default class Map extends React.Component {
                             <h2>Boston Mutual Aid</h2>
                         </div>
                         
-                        <Form/>
+                        <Form parentCallback={this.updateInformation()}/>
                     </div>
                     
                     <div className="neighborhoods">
