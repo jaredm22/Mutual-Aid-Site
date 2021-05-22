@@ -16,7 +16,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import logo from '../../images/julia1.jpg';
   
-mapboxgl.accessToken = process.env.GATSBY_MAPBOX_ACCESS_TOKEN;
+mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN;
 export default class Map extends React.Component {
 
     constructor(props) {
