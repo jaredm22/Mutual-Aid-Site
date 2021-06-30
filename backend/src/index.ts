@@ -43,7 +43,7 @@ app.get('/locationInfo/findByNeighborhood/:neighborhood', async(req:any, res:any
 
 
 app.post('/location/add', async (req:any, res:any) => {
-    const {name, neighborhood, phone, email, website, give_help, need_help, address_one, address_two, city, state, zip } = req.body;
+    const {name, neighborhood, phone, email, website, give_help, need_help, address_one, address_two, city, state, zip, tags } = req.body;
     try { 
         const location = await prisma.mutualAid.create({
             data: {
@@ -58,7 +58,8 @@ app.post('/location/add', async (req:any, res:any) => {
                 address_two,
                 city,
                 state,
-                zip
+                zip,
+                tags
             }
         })
         res.json(location)

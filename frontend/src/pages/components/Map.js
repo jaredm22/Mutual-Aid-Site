@@ -273,6 +273,7 @@ function Neighborhood(props) {
           </CardContent>
   
           <CardContent className="organization-links">
+            {org.tags[0] == "food" ? <p>Food</p> : false}
             {org.website !== "" ? (<a href={org.website}>Website</a>)  : false}
             {org.give_help !== "" ? (<a href={org.give_help}>Give Help</a>)  : false}
             {org.need_help !== "" ? (<a href={org.need_help}>Get Help</a>)  : false}

@@ -133,11 +133,23 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
 
 .organization-links a {
   width: fit-content;
+  height: fit-content;
   border-radius: 25px;
   padding: 5px 10px;
   margin-right: 5px;
   color: black;
   border: 3px solid #4da6ff;
+  text-decoration: none;
+}
+
+.organization-links p {
+  width: fit-content;
+  height: fit-content;
+  border-radius: 25px;
+  padding: 5px 10px;
+  margin-right: 5px;
+  color: black;
+  border: 3px solid #ffc933;
   text-decoration: none;
 }
 
