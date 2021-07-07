@@ -8,17 +8,18 @@ datasource db {
 }
 
 model MutualAid {
-  id           Int    @id @default(autoincrement())
-  name         String @db.VarChar(255)
-  neighborhood String
+  id           Int      @id @default(autoincrement())
+  name         String
+  neighborhood String[]
   phone        String
   email        String
   website      String
-  need_help    String
   give_help    String
+  need_help    String
   address_one  String
   address_two  String
   city         String
   state        String
   zip          String
+  tags         String[]
 }
