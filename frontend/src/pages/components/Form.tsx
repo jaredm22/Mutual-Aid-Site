@@ -30,8 +30,17 @@ interface FormState {
     city: string,
     state: string,
     zip: string,
-    show: boolean
+    show: boolean,
+    tag: Array<string>,
+    days: Array<string>,
+    times: Array<string>
 }
+
+const tags = [
+    "Food",
+    "Shelter",
+    "Grocery"
+]
 
 const neighborhoods = [
     "Boston-wide",
@@ -90,6 +99,9 @@ export class Form extends React.Component<FormProps, FormState> {
             city: '',
             state: '',
             zip: '',
+            days: [],
+            times: [],
+            tag: [],
             show: false
         }
         this.state = initialState;
@@ -137,6 +149,9 @@ export class Form extends React.Component<FormProps, FormState> {
                 city: this.state.city,
                 state: this.state.state,
                 zip: this.state.zip,
+                tag: this.state.tag.join(),
+                days: this.state.days,
+                times: this.state.times
             }
         })
         .then((res:any) => {
@@ -150,7 +165,7 @@ export class Form extends React.Component<FormProps, FormState> {
     }
 
     handleClose() {
-        this.setState({show: false, name: '', neighborhood: ['Boston-wide'], phone:'', email:'', website:'', need_help:'', give_help: '', address_one:'', address_two:'', city:'', state:'',zip:''})
+        this.setState({show: false, name: '', neighborhood: ['Boston-wide'], phone:'', email:'', website:'', need_help:'', give_help: '', address_one:'', address_two:'', city:'', state:'',zip:'',tags:['']})
     }
 
     handleShow() {
@@ -163,7 +178,7 @@ export class Form extends React.Component<FormProps, FormState> {
     }
 
     render() {
-        var { name, neighborhood, phone, email, website, need_help, give_help, address_one, address_two, city, state, zip } = this.state
+        var { name, neighborhood, phone, email, website, need_help, give_help, address_one, address_two, city, state, zip, tag } = this.state
         return(
             <div className='form-container'>
                 <Button id="add-org-button" className="btn-primary" variant="light" onClick={this.handleShow}><h6>Add a Mutual Aid Organization</h6></Button>
@@ -330,7 +345,34 @@ export class Form extends React.Component<FormProps, FormState> {
                                     </Select>
                                 </FormControl>
                             </div> 
-                        
+                            <div>
+                                <FormControl>
+                                    <InputLabel id="demo-mutiple-chip-label">Tags</InputLabel>
+                                    <Select
+                                        labelId="demo-mutiple-chip-label"
+                                        id="demo-mutiple-chip"
+                                        multiple
+                                        name="tag"
+                                        value={tag}
+                                        onChange={this.handleChange}
+                                        input={<Input id="select-multiple-chip" />}
+                                        renderValue={(selected) => (
+                                            <div>
+                                                {selected.map((value) => (
+                                                    <Chip key={value} label={value}/>
+                                                ))}
+                                            </div>
+                                        )}
+                                        MenuProps={MenuProps}
+                                    >
+                                        {tags.map((n) => (
+                                            <MenuItem key={n} value={n} >
+                                                {n}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </div> 
                             <div className='captcha'>
                                 <ReCAPTCHA sitekey={process.env.SITE_KEY} onChange={this.onChange}/>
                             </div>
