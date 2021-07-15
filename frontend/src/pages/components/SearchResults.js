@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios';
-import {temp} from '../../images/temp.png';
+import temp from '../../images/temp.png';
+import './searchresults.css'
 
 class SearchResults extends React.Component {
 
@@ -44,8 +45,18 @@ class SearchResults extends React.Component {
                         {this.state.locations.map((location, index) => {
                             return (
                             <div className="location">
-                                <img src={temp} alt="image"/>
-                                <h1>{index+1}{location.name}</h1>
+                                <div className="location-index">{index+1}</div>
+                                <div className="location-desc">
+                                    <div className="location-info title">{location.name}</div>
+                                    <div className="location-info">Distribution Days: Wednesday</div>
+                                    <div className="location-info">Distribution Time: Varies</div>
+                                    {location.phone == '' ? 
+                                    <div className="location-info">Contact: Not Available</div> :
+                                    <div className="location-info">Contact: #{location.phone}</div>
+                                    }
+                                </div>
+                                <div className="location-button">
+                                </div>
                             </div>
                             )
                         })}
