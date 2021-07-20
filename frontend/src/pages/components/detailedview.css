@@ -1,0 +1,40 @@
+.detailed-view {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(170, 255, 213);
+    width: 30%;
+    padding-bottom: 5em;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding-left: 10%;
+}
+
+img {
+    max-width: 80%;
+    margin-left: 10%;
+}
+
+.back-button {
+    width: 10%;
+    height: 2em;
+    border: 0px;
+    border-radius: 20px;
+    background-color: #0054A5;
+    color: white;
+    margin-right: 5%;
+}
+
+.location-description {
+    margin-left: 12%;
+    margin-top: 1em;
+}
+
+.location-name {
+    font-size: 25px;
+    text-align: center;
+}

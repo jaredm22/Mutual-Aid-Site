@@ -36,3 +36,21 @@
     text-align: center;
     padding-top: 8px;
 }
+
+.button-group {
+    display: flex;
+    flex-direction: row
+}
+
+.page-button {
+    width: 20%;
+    border: 0px;
+    border-radius: 20px;
+    background-color: #0054A5;
+    color: white;
+}
+
+.prev {
+    margin-left: 15px;
+    margin-right: 52%;
+}
