@@ -77,6 +77,27 @@ export default class Map extends React.Component {
                 }
             });
 
+            // map.addLayer({
+            //     'id': 'polygons',
+            //     'type': 'fill',
+            //     'source': 'neighborhoods',
+            //     'layout': {},
+            //     'paint': {
+            //         'fill-color': {
+            //             property: 'name',
+            //             type: 'categorical',
+            //             stops: [
+            //                 ['Roslindale', "#FF5733"],
+            //                 ['Jamaica Plain', "#FF5733"],
+            //                 ['Misiion Hill', "#FF5733"],
+            //                 ['Longwood', "#FF5733"],
+            //                 ['Bay Village', "#FF5733"]
+            //             ]    
+            //         },
+            //         'fill-opacity': 0.4
+            //     }
+            // });
+        
             var popup = new mapboxgl.Popup({
                 closeButton: false,
                 closeOnClick: false
@@ -175,13 +196,13 @@ export default class Map extends React.Component {
 
 function Neighborhoods (props) {
     const neighborhoodData = props.neighborhoodData;
-    // console.log(neighborhoodData);
+    console.log(neighborhoodData);
     
     const d =  neighborhoodData.features.map((neighborhood) => {
         return neighborhood.properties.Name;
     });
     
-    // console.log(d);
+    //console.log(d);
     d.sort();
     d.unshift('Boston-wide');
 

@@ -22,4 +22,6 @@ model MutualAid {
   state        String
   zip          String
   tags         String[]
+  days         String[]
+  times        String[]
 }
