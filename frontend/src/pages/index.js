@@ -1,6 +1,7 @@
 import React from 'react';
 import Map from './components/Map';
 import Bar from './components/Bar';
+import SearchBar from './components/SearchBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
 		<div>
 			<Map />
 			<Bar/>	
+			<SearchBar/>
 		</div>
 	);
 }

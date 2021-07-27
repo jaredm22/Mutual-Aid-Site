@@ -1,4 +1,4 @@
-.form-container {
+/* .form-container {
     display: flex;
     flex-direction: column;
 }
@@ -17,9 +17,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-}
-
-.input-box {
+} */
+/* 
+ .input-box {
     width: 100%;
 }
 
@@ -29,14 +29,14 @@
 
 .captcha {
     margin-top: 10px;
-}
+} 
 
 .submit-button {
     margin-top: 10px;
     border: 1px solid black;
     background: none;
     border-radius: 25px;
-}
+} 
 
 #add-org-button {
     background: #0054A5;
@@ -49,4 +49,4 @@
     background: #007ef4;
     color: white;
     border: none;
-}
+}  */

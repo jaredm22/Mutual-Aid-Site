@@ -1,6 +1,96 @@
-#RightSide {
-    background-color: blue;
-    width: 400px;
-    padding: 50px;
-    margin: 80px;
+.MyNavContainer{
+    position: absolute;
+    border-style: solid;
+    border-color: red;
+    padding: 25px;
+    width: 1439.9px;
+    height: 23.9%;
+
 }
+
+#boston{
+    color: rgb(0, 84, 165);
+    margin: 3px;
+    font-weight: bold;
+
+}
+#food{
+    color: rgb(244, 111, 33);
+    margin-right: 3px;
+    margin: 3px;
+    margin-top: -40px;
+    font-weight: bold;
+    font-size: 50.8px;
+}
+
+
+#program{
+    color: rgb(244, 111, 33);
+    margin: 175px;
+    margin-top: -102px;
+    font-size: 50.8px;
+    font-weight: bold;
+}
+
+#VerticalOrange{
+    position: absolute;
+    top: 60px;
+    margin-left: 36.0%;
+    border-left: 33px solid rgb(244,111,33);
+    height: 80px;
+} 
+
+
+#RightSide {
+    background-color: rgb(0, 84, 165);
+    width: 840px;
+    padding: 36.0px;
+    margin-left: 40%;
+    left: 22px;
+    top: 60px;
+    position: absolute;
+}
+
+
+
+
+
+
+/* .LeftSide {
+    margin-left: -20px;
+    margin-top: -10px;
+
+    width: 40%;
+    height: auto;
+    object-fit: contain;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .Food{
+    margin-left: -15px;
+    padding-left: -25px;
+    color: rgb(244, 111, 33);
+    font-size: 40px;
+    
+
+} */
+/* .Programs {
+    color: rgb(244, 111, 33);
+    margin-left: 120px;
+    margin-top: -59px;
+    padding: 5px;
+    font-size: 40px;
+} */
+
+ 

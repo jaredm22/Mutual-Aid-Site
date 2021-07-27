@@ -1,17 +1,19 @@
 import React from 'react';
 import './bar.css';
+import img1 from '../../images/header.jpg';
 
 export default class Bar extends React.Component {
     render() {
+    
         return(
-            <nav className="Bar">
-              <div className="LeftSide"> 
-                <span style="color:blue;font-weight:bold">BOSTON NEIGHBORHOOD 
-                </span>
-                <br/>
-                <span style="color:orange;font-weight:bold">FOOD PROGRAMS</span>
-            </div> 
+            <nav className="MyNavContainer">
+              <div className="LeftSide">
+                  <h1 id="boston">BOSTON NEIGHBORHOOD</h1>
+                  <h1 id="food">FOOD</h1>
+                  <h1 id="program">PROGRAMS</h1>
+              </div> 
             <div id="RightSide"> </div>
+            <div id="VerticalOrange"></div>
             </nav>
         );
     }
