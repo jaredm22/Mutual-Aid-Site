@@ -14,7 +14,7 @@ import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import logo from '../../images/julia1.jpg';
+// import logo from '../../images/julia1.jpg';
   
 mapboxgl.accessToken = process.env.GATSBY_MAPBOX_ACCESS_TOKEN;
 export default class Map extends React.Component {
@@ -150,10 +150,10 @@ export default class Map extends React.Component {
             <div className="main-container">
                 <div className='sidebar'>
                     <div className='heading'>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", alignItems: "center" }}>
-                            <img className="logo" src={logo} style={{paddingRight: "20px"}}></img>
-                            <h2>Boston Mutual Aid</h2>
-                        </div>
+                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", alignItems: "center" }}> 
+                            {/* <img className="logo" src={logo} style={{paddingRight: "20px"}}></img> */} 
+                             {/* <h2>Boston Mutual Aid</h2> */}
+                         </div>
                         
                         <Form parentCallback={this.updateInformation()}/>
                     </div>

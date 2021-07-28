@@ -15,8 +15,8 @@ body {
 }
 
 .logo {
-  height: 120px;
-  width: 200px;
+   height: 50px; /* 120 */
+  width: 50px; /* 200 */
 }
 
 h1 {
@@ -38,6 +38,7 @@ a:hover {
 
 .main-container {
   position: absolute;
+  top: 119px;
   display: flex;
   height: 100%;
   width: 100%;
@@ -52,9 +53,9 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
   flex-direction: column;
   width: 33%;
   height: 100%;
-  top: 0;
+  top: 35px;
   left: 0;
-  border-right: 1px solid rgba(0, 0, 0, 0.25);
+  /* border-right: 1px solid rgba(0, 0, 0, 0.25);  this makes a vertical line */
 }
 
 .map {
@@ -62,16 +63,16 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
   left: 33%;
   height: 100%;
   width: 67%;
-  top: 0;
-  bottom: 0;
+  top: 65px; 
+  bottom: 20px;
   overflow: hidden;
 }
 
 .heading {
-  background: #F46F20;
+  /* background: #F46F20; */
   color: white;
-  border-bottom: 1px solid #eee;
-  padding: 3em;
+  border-bottom: 2px solid #eee;
+  padding: 1em;
 }
 
 .neighborhoods {
@@ -81,7 +82,7 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
 
 .neighborhoods .item {
   display: block;
-  border-bottom: 1px solid #eee;
+  border-bottom: px solid #eee;
   padding: 10px;
   text-decoration: none;
 }
@@ -158,4 +159,6 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
   color: white;
   background: #4da6ff;
 }
+
+
 
