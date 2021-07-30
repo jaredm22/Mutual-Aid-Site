@@ -1,8 +1,8 @@
 .detailed-view {
     display: flex;
     flex-direction: column;
-    background-color: rgb(170, 255, 213);
-    width: 30%;
+    background-color: white;
+    width: 65%;
     padding-bottom: 5em;
 }
 
@@ -20,13 +20,13 @@ img {
 }
 
 .back-button {
-    width: 10%;
-    height: 2em;
-    border: 0px;
-    border-radius: 20px;
-    background-color: #0054A5;
-    color: white;
+    width: 5%;
+    border-radius: none;
+    padding: 0;
+    border: none;
+    background: none;
     margin-right: 5%;
+    transform: scaleX(-1)
 }
 
 .location-description {

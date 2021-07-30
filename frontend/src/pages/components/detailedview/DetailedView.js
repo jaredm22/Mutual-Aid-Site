@@ -1,5 +1,6 @@
 import React from 'react'
-import temp from '../../images/temp.png';
+import temp from '../../../images/temp.png';
+import prevbutton from '../../../images/nextbutton.png';
 import './detailedview.css'
 
 class DetailedView extends React.Component {
@@ -97,7 +98,7 @@ class DetailedView extends React.Component {
         return(
             <div className="detailed-view">
                 <div className="header">
-                    <button className="back-button" onClick={this.onBackClick}>Back</button>
+                    <button className="back-button" onClick={this.onBackClick}><img src={prevbutton}/></button>
                     <div className="location-name">{this.state.name}</div>
                 </div>
                 <div className="image"><img src={temp} alt="location image"/></div>

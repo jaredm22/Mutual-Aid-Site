@@ -1,0 +1,156 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.map {
+  height: 75vh;
+  width: 90%;
+  border: 3px solid black;
+}
+
+/* Old css */
+
+
+/* body {
+  font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  overflow-y: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+.logo {
+  height: 50px; 
+  width: 50px; 
+}
+
+h1 {
+  font-size: 22px;
+  margin: 0;
+  font-weight: 400;
+  line-height: 20px;
+  padding: 20px 2px;
+}
+
+a {
+  color: #404040;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #101010;
+}
+
+
+
+
+.sidebar {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  height: 100%;
+  top: 35px;
+  left: 0;
+}
+
+
+
+.heading {
+  color: white;
+  border-bottom: 2px solid #eee;
+  padding: 1em;
+}
+
+.neighborhoods {
+  height: 100%;
+  overflow: scroll;
+}
+
+.neighborhoods .item {
+  display: block;
+  border-bottom: px solid #eee;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.neighborhoods .item:last-child { border-bottom: none; }
+
+.neighborhoods .item .title {
+  display: block;
+  color: #00853e;
+  font-weight: 700;
+}
+
+.neighborhoods .item .title small { font-weight: 400; }
+
+.neighborhoods .item.active .title,
+.neighborhoods .item .title:hover { color: #8cc63f; }
+
+.neighborhoods .item.active {
+  background-color: #f8f8f8;
+}
+
+.organization {
+  width: 100%;
+  min-height: fit-content;
+  display: flex;
+  flex-direction: column;
+  border-right: 20px solid #4da6ff;
+}
+
+.organization-info {
+  width: 100%;
+  min-height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  text-align: left;
+}
+
+.organization-links {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: left;
+  padding: 3rem;
+  text-align: center;
+  min-height: fit-content;
+}
+
+.organization-links a {
+  width: fit-content;
+  height: fit-content;
+  border-radius: 25px;
+  padding: 5px 10px;
+  margin-right: 5px;
+  color: black;
+  border: 3px solid #4da6ff;
+  text-decoration: none;
+}
+
+.organization-links p {
+  width: fit-content;
+  height: fit-content;
+  border-radius: 25px;
+  padding: 5px 10px;
+  margin-right: 5px;
+  color: black;
+  border: 3px solid #ffc933;
+  text-decoration: none;
+}
+
+.organization-links a:hover {
+  text-decoration: none;
+  color: white;
+  background: #4da6ff;
+} */
+
+
+
+
