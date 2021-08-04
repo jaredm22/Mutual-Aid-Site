@@ -13,7 +13,7 @@ class SearchResults extends React.Component {
         this.state = {
             locations: [], //receive from parent when search bar is completed
             loading: true,
-            locationsPerPage: 5,
+            locationsPerPage: 4,
             currentPage: 1,
             maxPage: -1,
             prevDisabled: true,
