@@ -9,6 +9,41 @@ var cors = require('cors')
 app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.post('/register', async(req:any, res:any)=>{
+    const email = req.body.email
+    const password = req.body.password
+    try{
+        const user = await prisma.mutualAid.create({
+            data: [
+                {email: email, password:password}
+            ]
+        })
+        res.json(user);
+    } catch (e) {
+        res.json(e)
+    }
+});
+
+app.post('/login', async(req:any, res:any) => {
+    const email = req.body.email
+    const password = req.body.password
+    try{
+        const user = await prisma.mutualAid.find({
+            where: {
+                email:{
+                    equals: email
+                },
+                password:{
+                    password:password
+                }
+            }
+        })
+        res.send(user);
+    }catch(e){
+        res.send({message: "Wrong email/password combination"})
+    }
+})
 // start the Express server
 app.listen(port, () => {
     console.log( `Server started at http://localhost:${ port }` );
